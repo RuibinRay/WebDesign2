@@ -42,7 +42,7 @@ const CLIPS = flag('clips') ? path.resolve(flag('clips')) : path.join(ROOT, 'pro
 const OUT = flag('out') ? path.resolve(flag('out')) : path.join(ROOT, 'public/videos/rica-oto-film.mp4');
 const WORK = flag('out') ? path.join(path.dirname(OUT), 'edit-work') : path.join(ROOT, 'production/edit/work');
 const AUDIO = flag('audio') ? path.resolve(flag('audio')) : path.join(ROOT, 'production/renders/audio');
-const POSTER_AT = Number(flag('poster-at') ?? 25.5); // the line-up
+const POSTER_AT = Number(flag('poster-at') ?? film.posterAt ?? 7);
 const SUPERS = !argv.includes('--no-supers');
 
 const W = 1920;
@@ -50,8 +50,8 @@ const H = 1080;
 const FPS = film.fps;
 const frames = (seconds) => Math.round(seconds * FPS);
 
-/** Where each cut starts inside its (longer) take. Tuned by eye after the first render. */
-const DEFAULT_IN = { S01: 1.8, S02: 0.8, S03: 1.0, S04: 0.8, S05: 1.0, S06: 0.6, S07: 1.2, S08: 0.5 };
+/** Where each cut starts inside its (longer) take, unless production/edit/cuts.json says otherwise. */
+const DEFAULT_IN = {};
 const cutsFile = path.join(ROOT, 'production/edit/cuts.json');
 const cuts = fs.existsSync(cutsFile) ? JSON.parse(fs.readFileSync(cutsFile, 'utf8')) : {};
 
@@ -91,6 +91,7 @@ for (const shot of shots) {
       cut: job.cut,
       len: len / jobs.length,
       in: cuts[job.key]?.in ?? cuts[shot.id]?.in ?? DEFAULT_IN[shot.id] ?? 0.5,
+      grade: cuts[job.key]?.grade ?? cuts[shot.id]?.grade ?? shot.grade ?? null,
       file: path.join(CLIPS, `${job.key}.mp4`),
     });
   }
@@ -183,7 +184,15 @@ async function endCard() {
         targetFormat: 'sfnt',
         variationAxes: { wght: 500, opsz: 96 },
       });
-      tagline += line(opentype.parse(ab(Buffer.from(ttf))), film.line, 62, W / 2, 640, palette.bone);
+      const bodoni = opentype.parse(ab(Buffer.from(ttf)));
+      tagline += line(bodoni, film.line, 62, W / 2, 628, palette.bone);
+      if (film.line2) {
+        const ttf2 = await subsetFont(fs.readFileSync(path.join(FSV_DIR, 'bodoni-moda/files/bodoni-moda-latin-opsz-italic.woff2')), film.line2, {
+          targetFormat: 'sfnt',
+          variationAxes: { wght: 400, opsz: 48 },
+        });
+        tagline += `<g opacity="0.72">${line(opentype.parse(ab(Buffer.from(ttf2))), film.line2, 36, W / 2, 694, palette.bone)}</g>`;
+      }
     } catch {
       try {
         tagline += line(loadFont(path.join(FS_DIR, 'shippori-mincho/files/shippori-mincho-latin-500-normal.woff')), film.line, 56, W / 2, 640, palette.bone);
@@ -193,7 +202,7 @@ async function endCard() {
       }
     }
     try {
-      tagline += line(loadFont(path.join(FS_DIR, 'shippori-mincho/files/shippori-mincho-japanese-500-normal.woff')), film.lineJa, 30, W / 2, 706, palette.bone, 6);
+      tagline += line(loadFont(path.join(FS_DIR, 'shippori-mincho/files/shippori-mincho-japanese-500-normal.woff')), film.lineJa, 28, W / 2, film.line2 ? 762 : 706, palette.bone, 6);
     } catch {
       console.log('note: the Japanese end-card line could not be outlined; it is omitted.');
     }
@@ -282,11 +291,11 @@ for (const s of segments) {
   if (png) {
     await ffmpeg([
       '-ss', start.toFixed(3), '-i', s.file, '-loop', '1', '-framerate', String(FPS), '-i', png,
-      '-filter_complex', `[0:v]${CONFORM}[v];[v][1:v]overlay=0:0:enable='gte(t,0.12)',format=yuv420p[o]`,
+      '-filter_complex', `[0:v]${CONFORM}${s.grade ? ',' + s.grade : ''}[v];[v][1:v]overlay=0:0:enable='gte(t,0.12)',format=yuv420p[o]`,
       '-map', '[o]', '-frames:v', String(frames(s.len)), ...ENC, out,
     ]);
   } else {
-    await ffmpeg(['-ss', start.toFixed(3), '-i', s.file, '-vf', CONFORM, '-frames:v', String(frames(s.len)), ...ENC, out]);
+    await ffmpeg(['-ss', start.toFixed(3), '-i', s.file, '-vf', CONFORM + (s.grade ? ',' + s.grade + ',format=yuv420p' : ''), '-frames:v', String(frames(s.len)), ...ENC, out]);
   }
   list.push(out);
   console.log(`  ${s.key.padEnd(14)} in ${start.toFixed(2)} s, ${s.len.toFixed(2)} s${png ? '  + sound word' : ''}`);
@@ -299,7 +308,7 @@ const picture = path.join(WORK, 'picture.mp4');
 await ffmpeg(['-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', picture]);
 
 /* ───────────── 5. sound ───────────── */
-const musicFile = ['music.mp3', 'music.wav', 'music.m4a'].map((f) => path.join(AUDIO, f)).find((f) => fs.existsSync(f));
+const audioFile = (key) => ['mp3', 'wav', 'm4a'].map((e) => path.join(AUDIO, `${key}.${e}`)).find((f) => fs.existsSync(f));
 const sfxDir = path.join(AUDIO, 'sfx');
 // production/edit/sound.json tunes the mix without touching the files:
 //   { "music": { "gain": -6 },
@@ -334,8 +343,11 @@ async function peakDb(file, start, dur) {
   const m = r.err.match(/max_volume:\s*(-?[\d.]+) dB/);
   return m ? Number(m[1]) : 0;
 }
-const musicIn = shots.find((s) => s.id === 'S05').t[0]; // 12.5 s: the needle drop
-const musicOut = shots.find((s) => s.id === 'S09').t[0]; // 27.5 s: stops dead
+// Music cues come from film.mjs; production/edit/sound.json may move or level each one by its key.
+const cues = (film.musicCues || [{ key: 'music', in: 0, out: total }])
+  .map((c) => ({ ...c, ...(soundCfg[c.key] || {}), file: audioFile(c.key) }))
+  .filter((c) => c.file && !c.mute);
+const musicFile = cues.length ? cues[0].file : null;
 const snapAt = segments.find((s) => s.endcard)?.snapAt ?? total - 1.6;
 const ownEndSnap = sfx.some((x) => /endcard/i.test(x.name));
 
@@ -343,11 +355,14 @@ const inputs = ['-f', 'lavfi', '-t', total.toFixed(3), '-i', 'anullsrc=r=48000:c
 const chains = ['[0:a]anull[a0]'];
 const mixIn = ['[a0]'];
 let ai = 1;
-if (musicFile) {
-  const len = musicOut - musicIn;
-  inputs.push('-i', musicFile);
+for (const c of cues) {
+  const len = c.out - c.in;
+  const from = c.start ?? 0; // where in the track to begin
+  const fadeIn = c.fadeIn ?? 0.04;
+  const fadeOut = c.fadeOut ?? 0.04; // 0.04 = a hard stop
+  inputs.push('-i', c.file);
   chains.push(
-    `[${ai}:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:${len},volume=${soundCfg.music?.gain ?? 0}dB,afade=t=in:st=0:d=0.04,afade=t=out:st=${(len - 0.04).toFixed(2)}:d=0.04,adelay=${Math.round(musicIn * 1000)}:all=1[a${ai}]`,
+    `[${ai}:a]aresample=48000,aformat=channel_layouts=stereo,atrim=${from}:${(from + len).toFixed(3)},asetpts=PTS-STARTPTS,volume=${c.gain ?? 0}dB,afade=t=in:st=0:d=${fadeIn},afade=t=out:st=${Math.max(0, len - fadeOut).toFixed(2)}:d=${fadeOut},adelay=${Math.round(c.in * 1000)}:all=1[a${ai}]`,
   );
   mixIn.push(`[a${ai}]`);
   ai++;
@@ -378,21 +393,30 @@ await ffmpeg([
 
 let sound = mix;
 if (musicFile) {
-  // Two-pass EBU R128: measure, then apply linearly so the dynamics are not pumped.
-  const target = 'I=-14:TP=-2.5:LRA=11'; // 1.5 dB of headroom: the AAC encode overshoots, and the master must stay under −1 dBTP
-  const pass1 = await exec('ffmpeg', ['-hide_banner', '-i', mix, '-af', `loudnorm=${target}:print_format=json`, '-f', 'null', '-']);
+  // Measure the whole mix (EBU R128), then apply ONE fixed gain and a peak limiter.
+  // Not loudnorm's second pass: when the gain it needs would push a peak over the ceiling it
+  // silently switches to its dynamic mode, which rides the level up in every quiet passage —
+  // and this film's joke is a silence. A fixed gain keeps quiet things quiet.
+  const TARGET = -14; // LUFS
+  const CEILING = -2.5; // dBFS: the AAC encode overshoots, and the master must stay under −1 dBTP
+  const MAX_GAIN = 6; // never lift a quiet mix by more than this; turn the music up in sound.json instead
+  const pass1 = await exec('ffmpeg', ['-hide_banner', '-i', mix, '-af', `loudnorm=I=${TARGET}:TP=${CEILING}:LRA=11:print_format=json`, '-f', 'null', '-']);
   const from = pass1.err.lastIndexOf('{');
   const m = JSON.parse(pass1.err.slice(from, pass1.err.indexOf('}', from) + 1));
+  const gain = Math.min(MAX_GAIN, TARGET - Number(m.input_i));
   sound = path.join(WORK, 'mix_norm.wav');
   await ffmpeg([
     '-i', mix,
-    '-af', `loudnorm=${target}:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true`,
+    '-af', `volume=${gain.toFixed(2)}dB,alimiter=limit=${(10 ** (CEILING / 20)).toFixed(4)}:attack=2:release=60:asc=0:level=0`,
     '-ar', '48000', sound,
   ]);
-  console.log(`  sound: music ${musicIn}–${musicOut} s, ${sfx.length} effect(s)${ownEndSnap ? '' : ', synthesised final snap'}; ${m.input_i} → −14 LUFS`);
+  console.log(
+    `  sound: ${cues.map((c) => `${c.key} ${c.in}–${c.out} s`).join(', ')}; ${sfx.length} effect(s)${ownEndSnap ? '' : ', synthesised final snap'}; ` +
+      `mix ${m.input_i} LUFS, ${gain >= 0 ? '+' : ''}${gain.toFixed(1)} dB → ${(Number(m.input_i) + gain).toFixed(1)} LUFS, peaks limited at ${CEILING} dBFS`,
+  );
 } else {
   console.log(
-    `  sound: no music.mp3 in ${path.relative(ROOT, AUDIO).split(path.sep).join('/')} — the film is written without music${sfx.length ? ` (${sfx.length} effect(s) laid in)` : ''}, and loudness is not normalised.`,
+    `  sound: no music files in ${path.relative(ROOT, AUDIO).split(path.sep).join('/')} — the film is written without music${sfx.length ? ` (${sfx.length} effect(s) laid in)` : ''}, and loudness is not normalised.`,
   );
 }
 
@@ -414,6 +438,17 @@ await mux(17, '256k', MASTER);
 await mux(24, '160k', OUT);
 const poster = OUT.replace(/\.mp4$/i, '-poster.jpg');
 await ffmpeg(['-ss', String(Math.min(POSTER_AT, total - 0.1)), '-i', MASTER, '-frames:v', '1', '-q:v', '2', poster]);
+
+// One frame per shot for the website's storyboard strip, taken from the finished film.
+if (!flag('out')) {
+  const thumbs = path.join(ROOT, 'src/assets/film');
+  fs.mkdirSync(thumbs, { recursive: true });
+  for (const f of fs.readdirSync(thumbs)) if (f.endsWith('.webp')) fs.rmSync(path.join(thumbs, f));
+  for (const shot of shots) {
+    const at = shot.thumbAt ?? shot.t[0] + (shot.t[1] - shot.t[0]) * (shot.video ? 0.55 : 0.75);
+    await ffmpeg(['-ss', at.toFixed(2), '-i', MASTER, '-frames:v', '1', '-vf', 'scale=640:-2', '-c:v', 'libwebp', '-q:v', '72', path.join(thumbs, `${shot.id}.webp`)]);
+  }
+}
 
 const rel = (f) => path.relative(ROOT, f).replaceAll('\\', '/');
 const mb = (f) => (fs.statSync(f).size / 1e6).toFixed(1);

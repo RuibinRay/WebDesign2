@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Media from './Media.jsx';
+import Title from './Title.jsx';
 import Wordmark, { Seal } from './Wordmark.jsx';
 import { finale, site } from '../data/site.js';
 import { getMedia } from '../data/media.js';
@@ -16,6 +17,16 @@ export default function Finale() {
   const closing = getMedia('closing-gone');
 
   const fx = useGsap((el, gsap) => {
+    const finaleEl = el.querySelector('.finale');
+    // the last line slides in from the left as the red arrives, and the dish settles into place
+    gsap.fromTo(
+      el.querySelector('.finale__title'),
+      { xPercent: -7 },
+      { xPercent: 0, ease: 'none', scrollTrigger: { trigger: finaleEl, start: 'top bottom', end: 'top 12%', scrub: true } },
+    );
+    const dish = el.querySelector('.finale__photo .media') || el.querySelector('.finale__dish i');
+    if (dish && dish.classList.contains('media'))
+      gsap.fromTo(dish, { yPercent: 9, rotate: -7, scale: 1.08 }, { yPercent: 0, rotate: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: finaleEl, start: 'top bottom', end: 'top top', scrub: true } });
     gsap.fromTo(
       el.querySelector('.footer__mark'),
       { yPercent: 28 },
@@ -62,13 +73,7 @@ export default function Finale() {
             <span className="label">{finale.jaNote}</span>
           </p>
 
-          <h2 id="finale-title" className="finale__title quiet" data-rise>
-            {finale.title.map((line, i) => (
-              <span className="rise" key={line} style={{ '--d': `${i * 0.12}s` }}>
-                <span>{line}</span>
-              </span>
-            ))}
-          </h2>
+          <Title id="finale-title" className="finale__title quiet" lines={finale.title} step={0.09} />
 
           <div className="finale__foot">
             <p className="finale__body" data-reveal style={{ '--d': '0.2s' }}>

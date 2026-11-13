@@ -316,3 +316,52 @@ section {
     animation: none;
   }
 }
+
+/* ───────── headings that arrive word by word (components/Title.jsx) ───────── */
+.title__line {
+  display: block;
+}
+.rise--word {
+  display: inline-block;
+  vertical-align: top;
+  /* room for italic overhang inside the mask, given back by the negative margins */
+  padding: 0 0.09em 0.16em;
+  margin: 0 0.13em -0.16em -0.09em;
+}
+.rise--word:last-child {
+  margin-right: -0.09em;
+}
+
+/* ───────── page progress ───────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 120;
+  height: 2px;
+  pointer-events: none;
+}
+.scroll-progress i {
+  display: block;
+  height: 100%;
+  background: var(--shu);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ───────── buttons lean toward the pointer (components/Motion.jsx) ───────── */
+.btn {
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition:
+    color 0.35s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+.btn:active {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise--word > span {
+    transform: none;
+  }
+}

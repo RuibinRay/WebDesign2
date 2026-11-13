@@ -1,72 +1,59 @@
 import { useEffect, useRef, useState } from 'react';
 import Media from './Media.jsx';
-import Wordmark from './Wordmark.jsx';
 import { film, shots } from '../../production/film.mjs';
-import { products } from '../data/products.js';
 import { getMedia, videoSlots, videoUrl } from '../data/media.js';
-import { useReveal } from '../hooks/useScroll.js';
+import { useGsap, useReveal } from '../hooks/useScroll.js';
 import '../styles/sections/film.css';
 
-/** What each storyboard frame shows on the site (the film's real start frames live in production/). */
-const FRAME = {
-  S01: { type: 'salt' },
-  S02: { type: 'media', id: 'story-slice', focus: '50% 64%' },
-  S03: { type: 'media', id: 'story-dry' },
-  S04: { type: 'media', id: 'story-salt' },
-  S05: { type: 'media', id: 'life-highball' },
-  S06: { type: 'media', id: 'life-bite', focus: '50% 40%' },
-  S07: { type: 'four' },
-  S08: { type: 'media', id: 'pack-lineup' },
-  S09: { type: 'name' },
-};
+/** One frame per shot, cut from the finished film by production/scripts/edit-film.mjs. */
+const frames = import.meta.glob('../assets/film/*.webp', { eager: true, query: '?url', import: 'default' });
+const frameOf = (id) => frames[`../assets/film/${id}.webp`] || null;
 
 const tc = (s) => {
   const whole = Math.floor(s);
-  const frames = Math.round((s - whole) * film.fps);
-  return `00:${String(whole).padStart(2, '0')}:${String(frames).padStart(2, '0')}`;
+  const fr = Math.round((s - whole) * film.fps);
+  return `00:${String(whole).padStart(2, '0')}:${String(fr).padStart(2, '0')}`;
 };
 
-function Frame({ shot }) {
-  const f = FRAME[shot.id];
-  if (f.type === 'media') return <Media id={f.id} fill focus={f.focus} sizes="360px" quiet />;
-  if (f.type === 'salt')
-    return (
-      <div className="frame-salt" aria-label="A single flake of salt falling through a shaft of light" role="img">
-        <i />
-      </div>
-    );
-  if (f.type === 'four')
-    return (
-      <div className="frame-four" role="img" aria-label="Four colour fields, one per cut, each with its sound word">
-        {products.slice(0, 4).map((p) => (
-          <span key={p.id} style={{ background: p.bg, color: p.ink }} lang="ja">
-            {p.kana}
-          </span>
-        ))}
-      </div>
-    );
-  return (
-    <div className="frame-name" role="img" aria-label="The Rica wordmark on black">
-      <Wordmark />
-    </div>
-  );
-}
-
 /**
- * 05 — CAMPAIGN EXPERIENCE. The film "OTO", plus its storyboard as a strip
- * you can drag through. The player uses public/videos/rica-oto-film.mp4 when
- * it exists (or the teaser); until then it shows a production slate.
+ * 05 — CAMPAIGN EXPERIENCE. The film "OTO" and its storyboard.
+ *
+ * The storyboard is also the film's scrubber: pick a frame and the film jumps there;
+ * play the film and the storyboard follows it. The player grows to full size as it
+ * scrolls into view. Until public/videos/rica-oto-film.mp4 exists, a production slate
+ * stands in for the player.
  */
 export default function Film() {
   const reveal = useReveal();
   const video = useRef(null);
   const strip = useRef(null);
   const cards = useRef([]);
+  const following = useRef(false);
   const [playing, setPlaying] = useState(false);
+  const [started, setStarted] = useState(false);
   const [active, setActive] = useState(0);
 
   const file = videoSlots.film ? 'rica-oto-film.mp4' : videoSlots.teaser ? 'rica-oto-teaser.mp4' : null;
-  const poster = getMedia('campaign-key').ready ? getMedia('campaign-key') : getMedia('hero');
+  const still = getMedia('campaign-key').ready ? getMedia('campaign-key') : getMedia('hero');
+  const poster = videoSlots.filmPoster ? videoUrl('rica-oto-film-poster.jpg') : still.largest || undefined;
+
+  // the player opens up like a cinema screen as it arrives
+  const fx = useGsap((el, gsap) => {
+    const player = el.querySelector('.player');
+    if (!player) return;
+    gsap.fromTo(
+      player,
+      { scale: 0.84, borderRadius: 28, opacity: 0.5 },
+      { scale: 1, borderRadius: 4, opacity: 1, ease: 'none', scrollTrigger: { trigger: player, start: 'top 96%', end: 'top 28%', scrub: true } },
+    );
+  }, []);
+
+  const scrollStripTo = (i, smooth = true) => {
+    const el = strip.current;
+    const c = cards.current[i];
+    if (!el || !c) return;
+    el.scrollTo({ left: c.offsetLeft - parseFloat(getComputedStyle(el).paddingLeft || 0), behavior: smooth ? 'smooth' : 'auto' });
+  };
 
   // drag to scroll the strip with a mouse
   useEffect(() => {
@@ -91,7 +78,8 @@ export default function Film() {
     };
     const onUp = () => {
       down = false;
-      el.classList.remove('is-dragging');
+      // keep the class for a tick so the click that ends a drag does not also jump the film
+      setTimeout(() => el.classList.remove('is-dragging'), 0);
     };
     el.addEventListener('pointerdown', onDown);
     window.addEventListener('pointermove', onMove);
@@ -103,13 +91,14 @@ export default function Film() {
     };
   }, []);
 
-  // keep the timeline in step with the card nearest the strip's left edge
+  // when the film is not driving it, the timeline follows whichever card is at the left of the strip
   useEffect(() => {
     const el = strip.current;
     if (!el) return undefined;
     let raf = 0;
     const read = () => {
       raf = 0;
+      if (following.current) return;
       const x = el.scrollLeft + el.clientWidth * 0.3;
       let best = 0;
       cards.current.forEach((c, i) => {
@@ -127,23 +116,46 @@ export default function Film() {
     };
   }, []);
 
-  const jump = (i) => {
-    const el = strip.current;
-    const c = cards.current[i];
-    if (!el || !c) return;
-    setActive(i);
-    el.scrollTo({ left: c.offsetLeft - parseFloat(getComputedStyle(el).paddingLeft || 0), behavior: 'smooth' });
+  // while the film plays, the storyboard follows it
+  const onTime = () => {
+    const v = video.current;
+    if (!v || v.paused) return;
+    const i = Math.max(0, shots.findIndex((s) => v.currentTime >= s.t[0] && v.currentTime < s.t[1]));
+    setActive((prev) => {
+      if (prev !== i) scrollStripTo(i);
+      return i;
+    });
   };
 
-  const toggle = () => {
+  /** Pick a frame: the strip moves there and, if there is a film, so does the film. */
+  const jump = (i) => {
+    if (strip.current?.classList.contains('is-dragging')) return;
+    setActive(i);
+    scrollStripTo(i);
     const v = video.current;
-    if (!v) return;
-    if (v.paused) v.play();
-    else v.pause();
+    if (v && file) {
+      setStarted(true);
+      v.currentTime = Math.min(shots[i].t[0] + 0.02, (v.duration || film.duration) - 0.1);
+      v.play().catch(() => {});
+    }
+  };
+
+  const play = () => {
+    setStarted(true);
+    video.current?.play().catch(() => {});
   };
 
   return (
-    <section id="film" ref={reveal} className="film" data-nav="light" aria-labelledby="film-title">
+    <section
+      id="film"
+      ref={(el) => {
+        reveal.current = el;
+        fx.current = el;
+      }}
+      className="film"
+      data-nav="light"
+      aria-labelledby="film-title"
+    >
       <div className="wrap film__head">
         <p className="label" data-reveal>
           <span className="film__no">05</span>The campaign film
@@ -165,35 +177,47 @@ export default function Film() {
       </div>
 
       <div className="wrap">
-        <div className={`player ${playing ? 'is-playing' : ''}`} data-reveal>
+        <div className={`player ${playing ? 'is-playing' : ''} ${started ? 'is-started' : ''}`}>
           {file ? (
             <>
               <video
                 ref={video}
                 className="player__video"
                 src={videoUrl(file)}
-                poster={poster.largest || undefined}
+                poster={poster}
                 preload="metadata"
                 playsInline
-                controls={playing}
-                onPlay={() => setPlaying(true)}
-                onPause={() => setPlaying(false)}
-                onEnded={() => setPlaying(false)}
+                controls={started}
+                onPlay={() => {
+                  setPlaying(true);
+                  following.current = true;
+                }}
+                onPause={() => {
+                  setPlaying(false);
+                  following.current = false;
+                }}
+                onEnded={() => {
+                  setPlaying(false);
+                  following.current = false;
+                }}
+                onTimeUpdate={onTime}
               />
-              {!playing && (
-                <button type="button" className="player__play" onClick={toggle} aria-label={`Play the film ${film.title}, ${film.duration} seconds`}>
+              {!started && (
+                <button type="button" className="player__play" onClick={play} aria-label={`Play the film ${film.title}, ${film.duration} seconds, with sound`}>
                   <span className="player__disc">
                     <svg viewBox="0 0 12 14" aria-hidden="true">
                       <path d="M0 0v14l12-7z" fill="currentColor" />
                     </svg>
                   </span>
-                  <span className="label">{videoSlots.film ? 'Play film' : 'Play teaser'} — 00:{String(film.duration).padStart(2, '0')}</span>
+                  <span className="label">
+                    {videoSlots.film ? 'Play the film' : 'Play teaser'} — 00:{String(film.duration).padStart(2, '0')} — sound on
+                  </span>
                 </button>
               )}
             </>
           ) : (
             <div className="slate">
-              <Media id={poster.id} fill sizes="100vw" focus="70% 60%" quiet />
+              <Media id={still.id} fill sizes="100vw" focus="70% 60%" quiet />
               <div className="slate__veil" aria-hidden="true" />
               <dl className="slate__grid label">
                 <div>
@@ -237,13 +261,13 @@ export default function Film() {
 
       <div className="board">
         <div className="wrap board__head">
-          <p className="label">Frame by frame — drag to scrub</p>
+          <p className="label">{file ? 'Frame by frame — pick one to jump there' : 'Frame by frame — drag to scrub'}</p>
           <div className="timeline" role="group" aria-label="Film timeline">
             {shots.map((s, i) => (
               <button
                 key={s.id}
                 type="button"
-                aria-current={i === active ? "true" : undefined}
+                aria-current={i === active ? 'true' : undefined}
                 aria-label={`Frame ${s.frame}: ${s.name}, ${s.t[0]} to ${s.t[1]} seconds`}
                 className={`timeline__seg ${i === active ? 'is-active' : ''} ${i < active ? 'is-past' : ''}`}
                 style={{ flexGrow: s.t[1] - s.t[0] }}
@@ -253,7 +277,7 @@ export default function Film() {
               </button>
             ))}
           </div>
-          <p className="label board__clock" aria-live="off">
+          <p className="label board__clock">
             {tc(shots[active].t[0])} <span>/ {tc(film.duration)}</span>
           </p>
         </div>
@@ -261,12 +285,25 @@ export default function Film() {
         <ol className="board__strip" ref={strip} tabIndex={0} aria-label="Storyboard">
           {shots.map((s, i) => (
             <li key={s.id} ref={(el) => (cards.current[i] = el)} className={`shot ${i === active ? 'is-active' : ''}`}>
-              <div className="shot__frame">
-                <Frame shot={s} />
+              <button type="button" className="shot__frame" onClick={() => jump(i)} aria-label={`Frame ${s.frame}, ${s.name}${file ? ': play from here' : ''}`}>
+                {frameOf(s.id) ? (
+                  <img src={frameOf(s.id)} alt="" loading="lazy" decoding="async" draggable="false" />
+                ) : (
+                  <span className="shot__blank loud" aria-hidden="true">
+                    {String(s.frame).padStart(2, '0')}
+                  </span>
+                )}
                 <span className="shot__tc label">
                   {tc(s.t[0])} → {tc(s.t[1])}
                 </span>
-              </div>
+                {file && (
+                  <span className="shot__go" aria-hidden="true">
+                    <svg viewBox="0 0 12 14">
+                      <path d="M0 0v14l12-7z" fill="currentColor" />
+                    </svg>
+                  </span>
+                )}
+              </button>
               <p className="shot__head">
                 <span className="label">F{String(s.frame).padStart(2, '0')}</span>
                 <span className="shot__name loud">{s.name}</span>

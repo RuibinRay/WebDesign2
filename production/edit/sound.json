@@ -1,16 +1,151 @@
 {
-  "music": { "gain": -11 },
-  "tick": { "start": 0.4, "dur": 0.5, "peak": -5, "at": 2.3 },
-  "blade": { "start": 0.3, "dur": 2.6, "peak": -8, "at": 3.0 },
-  "room": { "start": 0, "dur": 3.0, "peak": -18, "at": 6.0 },
-  "salt": { "start": 0, "dur": 3.4, "peak": -8, "at": 9.0 },
-  "needle": { "start": 0, "dur": 1.5, "peak": -7, "at": 12.5 },
-  "pour": { "start": 0.2, "dur": 1.6, "peak": -10, "at": 12.7 },
-  "clink": { "file": "pour", "start": 4.6, "dur": 0.7, "peak": -7, "at": 15.2 },
-  "snap": { "start": 0.5, "dur": 0.9, "peak": -2, "at": 16.68 },
-  "pari": { "start": 0.1, "dur": 0.7, "peak": -3, "at": 19.55 },
-  "zaku": { "start": 0.0, "dur": 0.9, "peak": -3, "at": 20.55 },
-  "saku": { "start": 0.4, "dur": 0.6, "peak": -4, "at": 21.44 },
-  "kari": { "start": 0.4, "dur": 0.8, "peak": -3, "at": 22.55 },
-  "endcard-snap": { "start": 1.05, "dur": 0.9, "peak": -2, "at": 28.3 }
+  "music-a": {
+    "in": 0,
+    "out": 10.2,
+    "gain": -3,
+    "fadeIn": 0.4
+  },
+  "music-b": {
+    "in": 21.5,
+    "out": 42,
+    "start": 0.3,
+    "gain": -4.5,
+    "fadeOut": 0.5
+  },
+  "tick": {
+    "mute": true
+  },
+  "room": {
+    "start": 0,
+    "dur": 3,
+    "peak": -33,
+    "at": 10.3
+  },
+  "needle": {
+    "mute": true
+  },
+  "cloth": {
+    "start": 0.5,
+    "dur": 2.3,
+    "peak": -22,
+    "at": 3.6
+  },
+  "snap": {
+    "start": 0.5,
+    "dur": 0.62,
+    "peak": -1,
+    "at": 10.05
+  },
+  "stool": {
+    "start": 0.2,
+    "dur": 1.2,
+    "peak": -17,
+    "at": 12.5
+  },
+  "glass-down": {
+    "start": 0,
+    "dur": 0.6,
+    "peak": -19,
+    "at": 15.3
+  },
+  "slide": {
+    "start": 1.4,
+    "dur": 1.3,
+    "peak": -14,
+    "at": 17.2
+  },
+  "snap2": {
+    "start": 2.7,
+    "dur": 0.7,
+    "peak": -2,
+    "at": 19.7
+  },
+  "pari": {
+    "start": 0.1,
+    "dur": 0.7,
+    "peak": -2,
+    "at": 21.55
+  },
+  "zaku": {
+    "start": 0,
+    "dur": 0.9,
+    "peak": -2,
+    "at": 22.55
+  },
+  "saku": {
+    "start": 0.4,
+    "dur": 0.6,
+    "peak": -3,
+    "at": 23.44
+  },
+  "kari": {
+    "start": 0.4,
+    "dur": 0.8,
+    "peak": -2,
+    "at": 24.55
+  },
+  "crowd": {
+    "start": 0.2,
+    "dur": 3.6,
+    "peak": -9,
+    "at": 25.5
+  },
+  "blade": {
+    "start": 0.3,
+    "dur": 1,
+    "peak": -9,
+    "at": 29
+  },
+  "salt": {
+    "start": 0,
+    "dur": 1,
+    "peak": -9,
+    "at": 31
+  },
+  "snap3": {
+    "start": 2.6,
+    "dur": 0.9,
+    "peak": -2,
+    "at": 32.15
+  },
+  "pour": {
+    "start": 0.2,
+    "dur": 1.6,
+    "peak": -10,
+    "at": 35.1
+  },
+  "clink": {
+    "file": "pour",
+    "start": 4.6,
+    "dur": 0.7,
+    "peak": -8,
+    "at": 37.4
+  },
+  "endcard-snap": {
+    "start": 1.05,
+    "dur": 0.9,
+    "peak": -1,
+    "at": 42.8
+  },
+  "room-b": {
+    "file": "room",
+    "start": 0,
+    "dur": 3,
+    "peak": -33,
+    "at": 13.2
+  },
+  "room-c": {
+    "file": "room",
+    "start": 0,
+    "dur": 3,
+    "peak": -33,
+    "at": 16.1
+  },
+  "room-d": {
+    "file": "room",
+    "start": 0,
+    "dur": 2.5,
+    "peak": -33,
+    "at": 19
+  }
 }

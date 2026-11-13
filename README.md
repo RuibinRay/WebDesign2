@@ -7,7 +7,7 @@ The brand experience for Rica Beef: paper-thin dried beef crisps from Japan, sol
 | What | Where |
 |---|---|
 | Brand book: story, voice, logo, colour, type, packaging, art direction | [docs/01-brand-book.md](docs/01-brand-book.md) |
-| Film storyboard "OTO", nine frames with image and video prompts, budget | [docs/02-film-storyboard.md](docs/02-film-storyboard.md) |
+| Film storyboard "OTO", fifteen frames with image and video prompts, sound, budget | [docs/02-film-storyboard.md](docs/02-film-storyboard.md) |
 | Website image storyboard, eighteen images with prompts | [docs/03-website-image-storyboard.md](docs/03-website-image-storyboard.md) |
 | Asset manifest: what exists, what is pending, what replaces each placeholder | [docs/04-asset-manifest.md](docs/04-asset-manifest.md) |
 
@@ -33,7 +33,7 @@ npm run build
 
 ```
 src/
-  components/      reusable pieces: Nav, Hero, Story, Collection, Pack3D, Waveform, Media, …
+  components/      reusable pieces: Nav, HeroScroll, Story, Collection, Film, Pack3D, Waveform, Media, …
   pages/           page compositions
   styles/          tokens.css (colour, type, spacing), base.css, fonts.css, sections/
   data/            products.js — the range: cuts, sound words, colours, copy, waveforms
@@ -45,18 +45,20 @@ src/
     fonts/         self-hosted, subsetted woff2 (written by `npm run fonts`)
     brand/         wordmark, lockup, seal, pack fronts as vector outlines (written by `npm run brand`)
 public/
-  videos/          hero-loop.mp4, rica-oto-film.mp4 — switched on automatically when present
+  videos/          scroll-hero-*.mp4, rica-oto-film.mp4, hero-loop.mp4 — switched on automatically when present
   favicon.svg
 scripts/           build-brand-assets, build-fonts, optimize-images
 production/        the film and photography kit
   look.mjs         the look bible: the strings pasted into every prompt
   stills.mjs       every still image as data: model, aspect, prompt, references, purpose
-  film.mjs         the film as data: nine shots, timings, video prompts
+  film.mjs         the film as data: fifteen shots, timings, video prompts
+  sound.mjs        the film's two music cues and its sound effects as data
+  edit/            cuts.json and sound.json: the edit, as two small files
   prices.mjs       credit prices as quoted on the day they were measured
   refs/            flat pack artwork passed to the image model as reference
   renders/         generated stills, video takes and audio (the originals)
   manifest.json    what has been generated, with job ids and source URLs
-  scripts/         generate, render-film, edit-film, build-docs
+  scripts/         generate, render-film, render-scroll-hero, generate-audio, edit-film, build-docs
 docs/              the four documents above
 ```
 
@@ -72,13 +74,14 @@ Several product facts are proposals, not confirmed: net weights, the sirloin and
 
 ## What exists
 
-Everything is generated: 26 stills (18 on the site, 8 film start frames), the 11 film takes, the music and 12 sound effects, the assembled film and the hero background loop. Status of every asset is in [docs/04-asset-manifest.md](docs/04-asset-manifest.md).
+Everything is generated: 40 stills (18 on the site; the rest are film start frames, the three cast portraits and the two ends of the hero shot), the 19 film takes, two music cues and 17 sound effects, the assembled film, the 4K hero shot and the hero background loop. Status of every asset is in [docs/04-asset-manifest.md](docs/04-asset-manifest.md).
 
 | File | What it is |
 |---|---|
-| `production/final/rica_oto_16x9_30s.mp4` | The film master: 1920×1080, 24 fps, H.264 CRF 17, about −15 LUFS |
-| `public/videos/rica-oto-film.mp4` | The web encode of the film that the site plays (about 7 MB) |
-| `public/videos/hero-loop.mp4` | The seamless hero background loop (silent, under 1 MB) |
+| `production/final/rica_oto_16x9_45s.mp4` | The film master, second cut: 45 s, 1920×1080, 24 fps, H.264 CRF 17, −14 LUFS |
+| `public/videos/rica-oto-film.mp4` | The web encode of the film that the site plays (about 13 MB) |
+| `public/videos/scroll-hero-2160.mp4`, `-1080.mp4`, `-m.mp4` | The hero: one 10 s shot in 4K that the visitor plays by scrolling, encoded for large screens, ordinary screens and phones |
+| `public/videos/hero-loop.mp4` | The still hero's background loop, shown to visitors who ask for reduced motion (silent, under 1 MB) |
 | `production/renders/` | The originals: stills, takes, audio |
 
 The site finds assets by name. If an image is ever missing, the `<Media id="…">` component shows an art-directed "frame pending" panel with the asset id instead of a broken image, until `src/assets/images/<id>-*.webp` exists. The video slots work the same way from `public/videos/` (restart the dev server or rebuild after adding a video).
@@ -96,17 +99,19 @@ Generation uses the [Higgsfield](https://higgsfield.ai) CLI and spends credits. 
 | `production/scripts/inspect-takes.mjs` | Prints where the action is in each take and writes frame sheets | No |
 | `production/scripts/generate-audio.mjs <all\|music\|sfx\|name …>` | Music and sound effects from `sound.mjs` | Yes |
 | `production/scripts/edit-film.mjs` | Cuts the film: trims, sound words, end card, mix, master and web encode | No |
-| `production/scripts/render-hero-loop.mjs [--go\|--loop]` | The hero background: one take from the hero still, folded into a seamless loop | With `--go` |
+| `production/scripts/render-scroll-hero.mjs [--go\|--fetch\|--encode]` | The scroll hero: one 4K shot between two approved frames, then the three encodes the page scrubs | With `--go` |
+| `production/scripts/render-hero-loop.mjs [--go\|--loop]` | The reduced-motion hero background: one take from the hero still, folded into a seamless loop | With `--go` |
+| `production/scripts/migrate-takes.mjs` | Copies the first cut's product takes to the names the second cut uses | No |
 | `npm run docs` | Rebuilds the storyboards and the asset manifest from the data and the manifest | No |
 
 To re-cut the film without generating anything, edit the two small files in `production/edit/` and run `edit-film.mjs` again:
 
 - `cuts.json` sets where each cut starts inside its take.
-- `sound.json` trims, levels and times every sound effect, and sets the music level.
+- `sound.json` trims, levels and times every sound effect, and sets where each music cue starts, stops and how loud it is.
 
 `--force` re-rolls a still or a take and keeps the previous one as `_v1`. To raise the pack shots to the top tier: `generate.mjs all --force --quality xhigh --resolution 4k`.
 
-What a full re-render costs is worked through in [docs/02-film-storyboard.md](docs/02-film-storyboard.md): the film is 11 takes and 51 seconds of generated footage, 816 credits on Seedance 2.5 at 1080p before re-rolls.
+What a full re-render costs is worked through in [docs/02-film-storyboard.md](docs/02-film-storyboard.md): the film is 19 takes and 91 seconds of generated footage, 1,456 credits on Seedance 2.5 at 1080p before re-rolls, and the hero shot is 220 on Seedance 2.0 at 4K.
 
 ## Deploy to GitHub Pages
 

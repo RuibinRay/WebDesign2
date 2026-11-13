@@ -22,7 +22,7 @@
   grid-column: 1 / -1;
   font-size: var(--t-display);
 }
-.world__title .rise:nth-child(2) {
+.world__title .title__line--2 {
   padding-left: 0.9em;
   color: var(--shu);
 }
@@ -72,11 +72,11 @@
 .place:nth-child(even) {
   transform: translateY(-2.2svh);
 }
-.place__frame .media {
-  transition: transform 1.4s var(--ease-out);
-}
-.place:hover .place__frame .media {
-  transform: scale(1.035);
+/* pinned gallery: the picture is wider than its frame so it can drift inside it */
+.world--pinned .place__frame .media {
+  left: -8%;
+  width: 116%;
+  max-width: none;
 }
 .place figcaption {
   display: grid;
@@ -178,7 +178,7 @@
   .world__lede {
     grid-column: 1 / -1;
   }
-  .world__title .rise:nth-child(2) {
+  .world__title .title__line--2 {
     padding-left: 0.5em;
   }
 }

@@ -2,12 +2,12 @@
  * Generate the film's sound on Higgsfield from production/sound.mjs.
  *
  *   node production/scripts/generate-audio.mjs all            # music + every effect not yet made
- *   node production/scripts/generate-audio.mjs music          # the music track only
+ *   node production/scripts/generate-audio.mjs music          # every music cue (or name one: music-a)
  *   node production/scripts/generate-audio.mjs sfx            # every effect
  *   node production/scripts/generate-audio.mjs snap pari      # named effects
  *   node production/scripts/generate-audio.mjs snap --force   # re-roll (keeps the old file as _vN)
  *
- * Writes production/renders/audio/music.<ext> and production/renders/audio/sfx/<time>_<name>.<ext>,
+ * Writes production/renders/audio/<cue>.<ext> and production/renders/audio/sfx/<time>_<name>.<ext>,
  * which is exactly where edit-film.mjs looks. Recorded under `audio` in production/manifest.json.
  * Needs the Higgsfield CLI, logged in. Set HF_BIN if it is not on PATH.
  */
@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { MUSIC_SECONDS, MUSIC_PROMPT, SFX } from '../sound.mjs';
+import { MUSIC, SFX } from '../sound.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const HF = process.env.HF_BIN || 'higgsfield';
@@ -27,14 +27,22 @@ const argv = process.argv.slice(2);
 const force = argv.includes('--force');
 const ids = argv.filter((a) => !a.startsWith('--'));
 if (!ids.length) {
-  console.error('Usage: node production/scripts/generate-audio.mjs <all|music|sfx|effect name …> [--force]');
+  console.error('Usage: node production/scripts/generate-audio.mjs <all|music|sfx|cue or effect name …> [--force]');
   console.error('Effects: ' + SFX.map((s) => s[1]).join(', '));
   process.exit(1);
 }
 
 const jobs = [];
-if (ids.includes('all') || ids.includes('music'))
-  jobs.push({ key: 'music', dir: AUDIO, base: 'music', args: ['generate', 'create', 'sonilo_music', '--prompt', MUSIC_PROMPT, '--duration', String(MUSIC_SECONDS)] });
+for (const m of MUSIC) {
+  if (ids.includes('all') || ids.includes('music') || ids.includes(m.key))
+    jobs.push({
+      key: m.key,
+      dir: AUDIO,
+      base: m.key,
+      match: new RegExp(`^${m.key}\\.(mp3|wav|m4a)$`, 'i'),
+      args: ['generate', 'create', 'sonilo_music', '--prompt', m.prompt, '--duration', String(m.seconds)],
+    });
+}
 for (const [t, name, prompt] of SFX) {
   if (ids.includes('all') || ids.includes('sfx') || ids.includes(name))
     jobs.push({
@@ -48,7 +56,7 @@ for (const [t, name, prompt] of SFX) {
 
 const exists = (job) => {
   if (!fs.existsSync(job.dir)) return null;
-  const hit = fs.readdirSync(job.dir).find((f) => (job.match ? job.match.test(f) : /^music\.(mp3|wav|m4a)$/i.test(f)));
+  const hit = fs.readdirSync(job.dir).find((f) => job.match.test(f));
   return hit ? path.join(job.dir, hit) : null;
 };
 

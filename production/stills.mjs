@@ -8,7 +8,7 @@
  *         `gpt_image_2_6` wherever the pack appears (it holds the artwork reference).
  * Generate with:  node production/scripts/generate.mjs <id> [<id> …]   (or `all`)
  */
-import { NIGHT, STUDIO, CRISP, PACK, NEG_CLEAN, NEG_PACK, CUTS } from './look.mjs';
+import { NIGHT, STUDIO, BAR, CAST, CRISP, PACK, NEG_CLEAN, NEG_PACK, CUTS } from './look.mjs';
 import { products } from '../src/data/products.js';
 
 const soul = (o) => ({ model: 'soul_cinematic', params: { quality: '2k' }, ...o });
@@ -161,6 +161,124 @@ export const stills = [
         prompt: `${STUDIO} Extreme close-up, the same framing as a matching set of four: one single piece of ${CUTS[p.id].crisp.replace('crisps:', 'crisp:')} floating in mid-air in the exact centre of the frame, filling about half its width, snapping cleanly in half down the middle — the two halves a finger-width apart, small shards and salt crystals bursting from the break, frozen tack-sharp. The whole background is ${CUTS[p.id].backdrop}: one flat seamless colour edge to edge, no floor line, no horizon, no surface. ${NEG_CLEAN} No hands.`,
       }),
     ),
+  /* ─────────── SCROLL HERO (4K): the two ends of one continuous shot ─────────── */
+  gpt({
+    id: 'scroll-start',
+    aspect: '16:9',
+    params: { resolution: '4k', quality: 'high' },
+    hero: 'first frame',
+    prompt: `${NIGHT} One large paper-thin ribeye crisp, whole and unbroken, floating upright in mid-air in the exact centre of the frame, facing the camera and filling about half the height of the frame. It is strongly backlit by warm light so its marbling glows translucent amber against mahogany red, and its edge is rim-lit and bright; a few coarse white salt crystals hang in the air around it. Directly behind it, far away and completely out of focus, the soft dim red shape of a box standing on black stone. The crisp is bright and clearly readable against a black background with a faint warm haze. ${CRISP} 85mm lens. ${NEG_CLEAN} No hands.`,
+  }),
+  gpt({
+    id: 'scroll-end',
+    aspect: '16:9',
+    params: { resolution: '4k', quality: 'high' },
+    refs: ['production/refs/pack-ribeye.png'],
+    hero: 'last frame',
+    prompt: `${NIGHT} The RICA Ribeye box standing upright in the exact centre of the frame on a matte black stone surface, facing the camera, tack sharp and brightly lit by the warm key light from camera-left, filling about half the height of the frame: ${PACK} At its base, a scatter of paper-thin ribeye crisps and coarse white salt flakes; a few small shards and salt crystals still falling through the air around it. Black background with a faint vermilion glow behind the box. 85mm lens. ${NEG_PACK}`,
+  }),
+
+  /* ─────────── FILM v2 — the cast (reference portraits, never shown) ─────────── */
+  ...Object.entries(CAST).map(([who, desc]) =>
+    gpt({
+      id: `cast-${who}`,
+      aspect: '3:4',
+      cast: who,
+      prompt: `${BAR} Portrait, chest up, three-quarter view: ${desc}, ${who === 'bartender' ? 'standing behind the counter holding a glass and a white cloth' : 'seated at the counter, listening to the music with a calm, private expression'}. Sharp eyes, natural skin texture. 85mm lens. ${NEG_CLEAN}`,
+    }),
+  ),
+
+  /* ─────────── FILM v2 — start frames (16:9) ─────────── */
+  gpt(
+    {
+      id: 'f-hush',
+      aspect: '16:9',
+      refs: ['production/renders/stills/cast-heroine.png', 'production/renders/stills/cast-man.png', 'production/renders/stills/cast-bartender.png', 'production/refs/pack-ribeye.png'],
+      film: 'A01',
+      prompt: `${BAR} Wide shot from one end of the counter, looking along it. Six people sit in a row at the counter in silence, eyes closed or lowered, listening to a record, drinks in front of them. Nearest to camera on the right sits ${CAST.heroine} (the woman in the first reference), and beside her ${CAST.man} (the second reference). Behind the counter on the left stands ${CAST.bartender} (the third reference), polishing a glass. In the left foreground a turntable spins a record. On the counter in front of the woman: a tall whisky highball with clear ice, a small black dish of paper-thin beef crisps, and the red RICA Ribeye box standing upright, which is ${PACK} Calm, still, hushed. 35mm lens. ${NEG_PACK}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-bartender',
+      aspect: '16:9',
+      refs: ['production/renders/stills/cast-bartender.png'],
+      film: 'A02 · A06',
+      prompt: `${BAR} Close-up of ${CAST.bartender} (the man in the reference) behind the counter, polishing a tall glass with a white cloth, eyes lowered to his work, dignified and unhurried. Shelves of vinyl records softly out of focus behind him. He is left of centre, facing slightly toward camera-right. 85mm lens. ${NEG_CLEAN}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-open',
+      aspect: '16:9',
+      refs: ['production/renders/stills/cast-heroine.png', 'production/renders/stills/cast-man.png', 'production/refs/pack-ribeye.png'],
+      film: 'A03',
+      prompt: `${BAR} Medium close-up of ${CAST.heroine} (the woman in the first reference) at the counter, three-quarter front view. She holds a single paper-thin beef crisp up between two fingers toward a warm pendant lamp so that the light passes through it and it glows translucent amber and red; she looks at it with quiet delight. On the counter beside her highball stands the red RICA Ribeye box, sharp, which is ${PACK} Beside her, softly out of focus, ${CAST.man} (the second reference) listens with his eyes closed. 50mm lens. ${NEG_PACK}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-snap',
+      aspect: '16:9',
+      refs: ['production/renders/stills/cast-heroine.png'],
+      film: 'A04',
+      prompt: `${BAR} Close-up in profile of ${CAST.heroine} (the woman in the reference), a paper-thin beef crisp held between her front teeth and her fingers at the instant before she bites it, eyes closed in anticipation. The crisp is lit warm and clearly visible. The bar softly out of focus behind her. 100mm lens. ${NEG_CLEAN}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-heads',
+      aspect: '16:9',
+      refs: ['production/renders/stills/f-hush.png', 'production/renders/stills/cast-heroine.png', 'production/renders/stills/cast-bartender.png'],
+      film: 'A05',
+      prompt: `${BAR} The same bar, the same people and the same wide framing as the first reference image, one second later: the woman with the dark bob nearest to camera sits frozen with wide eyes, cheeks full, holding the broken half of a beef crisp; everyone else at the counter is in the middle of turning their head toward her, eyes opening; behind the counter the bartender has lowered his glass. Tiny shards and salt crystals hang in the air in front of her. Comic stillness. 35mm lens. ${NEG_PACK}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-offer',
+      aspect: '16:9',
+      refs: ['production/renders/stills/cast-heroine.png', 'production/renders/stills/cast-man.png'],
+      film: 'A07',
+      prompt: `${BAR} Medium two-shot at the counter: ${CAST.heroine} (first reference) on the right, sheepish, one hand on a small black dish of paper-thin beef crisps that sits on the counter between them; ${CAST.man} (second reference) on the left looks down at the dish, tempted, one eyebrow up. Highball glasses on the counter. 50mm lens. ${NEG_CLEAN}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-second',
+      aspect: '16:9',
+      refs: ['production/renders/stills/cast-man.png'],
+      film: 'A08',
+      prompt: `${BAR} Close-up of ${CAST.man} (the man in the reference) holding a paper-thin beef crisp just in front of his mouth, about to bite, eyes glancing sideways toward camera-right with a mischievous look. The crisp is lit warm and clearly visible. 85mm lens. ${NEG_CLEAN}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-everyone',
+      aspect: '16:9',
+      refs: ['production/renders/stills/f-hush.png', 'production/refs/pack-sheet.png'],
+      film: 'A10',
+      prompt: `${BAR} The same bar, the same people and the same wide framing as the first reference image, now come alive: everyone at the counter is laughing, each holding or biting a paper-thin beef crisp, shards and salt crystals flying in the warm light; behind the counter the bartender watches with his arms folded. Along the counter stand five RICA boxes in five colours — vermilion red, mustard yellow, off-white, black and indigo blue — with the artwork of the second reference sheet. Joyful, warm, lively. 35mm lens. ${NEG_PACK}`,
+    },
+    'high',
+  ),
+  gpt(
+    {
+      id: 'f-bartender-bite',
+      aspect: '16:9',
+      refs: ['production/renders/stills/cast-bartender.png'],
+      film: 'A12',
+      prompt: `${BAR} Close-up of ${CAST.bartender} (the man in the reference) behind the counter, holding a single paper-thin beef crisp up in front of his face and examining it with deep suspicion, one eye narrowed. The crisp is lit warm and clearly visible. Shelves of vinyl softly out of focus behind him. 85mm lens. ${NEG_CLEAN}`,
+    },
+    'high',
+  ),
 ];
 
 export const stillById = Object.fromEntries(stills.map((s) => [s.id, s]));

@@ -312,9 +312,9 @@ The exact prompt language for both worlds is in `production/look.mjs` and is pri
 
 ## 14. Applications
 
-**Website.** One page, seven movements: Hero (the snap in the dark, the line), Story (Slice, Salt, Sound), Collection (the section takes the colour of the cut you choose; the pack turns in your hand; each cut shows its waveform and has its sound), Lifestyle (quiet places), Campaign (the film and its storyboard), Why Rica (the texture, the reasons), Final moment (an empty dish on vermilion). Dark for the world, paper for the reading, flat colour for the product.
+**Website.** One page, seven movements: Hero (one shot the visitor plays by scrolling: a whole crisp, the snap, the camera through the break to the pack), Story (Slice, Salt, Sound), Collection (the section takes the colour of the cut you choose; the pack turns in your hand; each cut shows its waveform and has its sound), Lifestyle (quiet places), Campaign (the film and its storyboard), Why Rica (the texture, the reasons), Final moment (an empty dish on vermilion). Dark for the world, paper for the reading, flat colour for the product.
 
-**Film.** "OTO" (音), thirty seconds: silence, a salt flake, a blade, the racks, the salt, the pour, the snap, four snaps on four colours, the five packs, the wordmark breaking. Full storyboard in [02-film-storyboard.md](02-film-storyboard.md).
+**Film.** "OTO" (音), forty-five seconds: a listening bar where nobody speaks, one bite that stops the room, the counter turning to look, the others giving in one by one, four snaps on four colours, the bartender last of all, the five packs, the wordmark breaking. It is lit to be seen on a phone in daylight; the first, darker cut was replaced for that reason. Full storyboard in [02-film-storyboard.md](02-film-storyboard.md).
 
 **Social formats.**
 

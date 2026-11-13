@@ -3,9 +3,10 @@ import Pack3D from './Pack3D.jsx';
 import Media from './Media.jsx';
 import SaltCanvas from './SaltCanvas.jsx';
 import Waveform from './Waveform.jsx';
+import Title from './Title.jsx';
 import { products } from '../data/products.js';
 import { useCrunch } from '../hooks/useCrunch.jsx';
-import { useReveal } from '../hooks/useScroll.js';
+import { useReveal, prefersReducedMotion } from '../hooks/useScroll.js';
 import '../styles/sections/collection.css';
 
 const METERS = [
@@ -22,6 +23,10 @@ const METERS = [
 export default function Collection() {
   const [index, setIndex] = useState(0);
   const [hit, setHit] = useState(0);
+  // `base` is the colour the panel has settled on; a change of cut opens a crack of the new colour over it
+  const [base, setBase] = useState(products[0].bg);
+  const [wipe, setWipe] = useState(0);
+  const firstPaint = useRef(true);
   const stage = useRef(null);
   const salt = useRef(null);
   const tabs = useRef([]);
@@ -52,6 +57,12 @@ export default function Collection() {
   // the header re-reads its colour when the panel repaints
   useEffect(() => {
     window.dispatchEvent(new Event('rica:navtheme'));
+    if (firstPaint.current) {
+      firstPaint.current = false;
+      return;
+    }
+    if (prefersReducedMotion()) setBase(products[index].bg);
+    else setWipe((w) => w + 1);
   }, [index]);
 
   const snap = () => {
@@ -85,22 +96,16 @@ export default function Collection() {
       ref={reveal}
       className="cuts"
       data-nav={light ? 'light' : 'dark'}
-      style={{ '--c-bg': p.bg, '--c-ink': p.ink, '--c-text': p.text }}
+      style={{ '--c-base': base, '--c-bg': p.bg, '--c-ink': p.ink, '--c-text': p.text }}
       aria-labelledby="cuts-title"
     >
+      {wipe > 0 && <div className="cuts__wipe" key={wipe} aria-hidden="true" onAnimationEnd={() => setBase(p.bg)} />}
       <div className="wrap">
         <header className="cuts__head">
           <p className="label" data-reveal>
             <span className="cuts__no">03</span> The cuts
           </p>
-          <h2 id="cuts-title" className="cuts__title quiet" data-rise>
-            <span className="rise">
-              <span>Five cuts.</span>
-            </span>
-            <span className="rise" style={{ '--d': '0.1s' }}>
-              <span>Five sounds.</span>
-            </span>
-          </h2>
+          <Title id="cuts-title" className="cuts__title quiet" lines={['Five cuts.', 'Five sounds.']} />
           <p className="cuts__intro" data-reveal style={{ '--d': '0.2s' }}>
             We do not blend. Each pack holds one cut, named for the noise it makes when it breaks.
           </p>
@@ -140,7 +145,7 @@ export default function Collection() {
             ))}
           </p>
           <SaltCanvas ref={salt} ambient={0} color={p.ink} className="cuts__salt" />
-          <div className="cuts__pack">
+          <div className="cuts__pack" data-reveal>
             <Pack3D product={p} hit={hit} stageRef={stage} />
           </div>
           <div className="cuts__stage-meta wrap">

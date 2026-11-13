@@ -147,5 +147,5 @@ export function getMedia(id) {
   };
 }
 
-export const videoSlots = typeof __RICA_VIDEO__ !== 'undefined' ? __RICA_VIDEO__ : { heroLoop: false, film: false, teaser: false };
+export const videoSlots = typeof __RICA_VIDEO__ !== 'undefined' ? __RICA_VIDEO__ : { heroLoop: false, film: false, teaser: false, filmPoster: false, scrollHero: false };
 export const videoUrl = (name) => `${import.meta.env.BASE_URL}videos/${name}`;

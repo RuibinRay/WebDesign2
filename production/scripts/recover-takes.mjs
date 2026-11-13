@@ -8,8 +8,8 @@
  *   node production/scripts/recover-takes.mjs --since 2026-11-13T18:30:00Z
  *   node production/scripts/recover-takes.mjs --dry-run       # list what it would fetch
  *
- * A job is matched to its shot by its prompt. The four S07 takes share one prompt, so
- * they are told apart by the colour of their first frame against the four start stills.
+ * A job is matched to its shot by its prompt. Takes that share a prompt (the four snaps) are
+ * told apart by the colour of their first frame against the shot’s start stills.
  */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -69,20 +69,14 @@ if (!jobs.length) {
   process.exit(0);
 }
 
-// start-frame colours for the S07 match
-const s07 = shots.find((s) => s.id === 'S07');
-const s07Refs = [];
-for (const job of jobsForShot(s07)) {
-  const f = stillFile(ROOT, job.start);
-  if (f) s07Refs.push({ key: job.key, cut: job.cut, start: job.start, rgb: await meanRgb(f) });
-}
 
 fs.mkdirSync(OUT, { recursive: true });
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'rica-recover-'));
 let n = 0;
 for (const j of jobs) {
   const prompt = String(j.params?.prompt || '');
-  const shot = shots.find((s) => s.video && prompt.startsWith(s.video.slice(0, 60)));
+  const prompts = (s) => (s.video && typeof s.video === 'object' ? Object.values(s.video) : [s.video]);
+  const shot = shots.find((s) => s.video && prompts(s).some((p) => prompt.startsWith(p.slice(0, 60))));
   if (!shot) {
     console.log(`· ${j.id.slice(0, 8)}  not a film shot (prompt: ${prompt.slice(0, 50)}…) — skipped`);
     continue;
@@ -118,7 +112,12 @@ for (const j of jobs) {
     const frame = path.join(tmp, `${j.id}.png`);
     await exec('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-i', raw, '-frames:v', '1', frame]);
     const rgb = await meanRgb(frame);
-    const best = s07Refs.map((r) => ({ ...r, d: dist(rgb, r.rgb) })).sort((a, b) => a.d - b.d)[0];
+    const refs = [];
+    for (const job of jobsForShot(shot)) {
+      const f = stillFile(ROOT, job.start);
+      if (f) refs.push({ key: job.key, cut: job.cut, start: job.start, rgb: await meanRgb(f) });
+    }
+    const best = refs.map((r) => ({ ...r, d: dist(rgb, r.rgb) })).sort((a, b) => a.d - b.d)[0];
     key = best.key;
     cut = best.cut;
     start = best.start;

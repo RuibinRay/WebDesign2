@@ -2,13 +2,30 @@
   --c-bg: var(--shu);
   --c-ink: var(--bone);
   --c-text: var(--sumi);
-  background: var(--c-bg);
+  --c-base: var(--c-bg);
+  background: var(--c-base);
   color: var(--c-text);
   padding-block: var(--section) calc(var(--section) * 0.8);
-  transition:
-    background-color 0.8s var(--ease-out),
-    color 0.6s var(--ease-out);
+  transition: color 0.5s var(--ease-out);
   overflow: hidden;
+  isolation: isolate;
+}
+
+/* A change of cut does not fade: the new colour opens along the crack, the same line that splits the logo. */
+.cuts__wipe {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--c-bg);
+  animation: cuts-wipe 0.95s var(--ease-snap) both;
+}
+@keyframes cuts-wipe {
+  from {
+    clip-path: polygon(58% 0, 52% 22%, 57% 38%, 47% 58%, 53% 74%, 44% 100%, 44% 100%, 53% 74%, 47% 58%, 57% 38%, 52% 22%, 58% 0);
+  }
+  to {
+    clip-path: polygon(-62% 0, -68% 22%, -63% 38%, -73% 58%, -67% 74%, -76% 100%, 164% 100%, 173% 74%, 167% 58%, 177% 38%, 172% 22%, 178% 0);
+  }
 }
 
 .cuts__head {
@@ -32,7 +49,7 @@
   color: var(--c-ink);
   transition: color 0.6s var(--ease-out);
 }
-.cuts__title .rise:nth-child(2) {
+.cuts__title .title__line--2 {
   padding-left: 0.9em;
 }
 .cuts__intro {
@@ -144,6 +161,16 @@
 .cuts__pack {
   position: relative;
   z-index: 1;
+}
+/* the pack drops in the first time the stage is seen */
+.cuts__pack[data-reveal] {
+  transform: translateY(16%) scale(0.8) rotate(-9deg);
+  transition:
+    opacity 0.7s ease,
+    transform 1.3s var(--ease-out);
+}
+.cuts__pack[data-reveal].is-in {
+  transform: none;
 }
 .cuts__stage-meta {
   position: absolute;

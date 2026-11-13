@@ -368,6 +368,231 @@
       "local_path": "production/renders/stills/kf-snap-shortrib.png",
       "seconds": 38,
       "at": "2026-11-13T18:37:14.713Z"
+    },
+    "cast-man": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "3:4",
+      "refs": [],
+      "job_id": "74f720b3-421e-47b5-a03f-9efbc5cdced1",
+      "local_path": "production/renders/stills/cast-man.png",
+      "seconds": 35,
+      "at": "2026-11-13T20:09:23.431Z"
+    },
+    "cast-heroine": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "3:4",
+      "refs": [],
+      "job_id": "cb0802d7-7e15-48a6-bee7-d9dab155ce91",
+      "local_path": "production/renders/stills/cast-heroine.png",
+      "seconds": 36,
+      "at": "2026-11-13T20:09:23.644Z"
+    },
+    "cast-bartender": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "3:4",
+      "refs": [],
+      "job_id": "3b9c60ec-feaf-461f-8cce-e2612ddd3583",
+      "local_path": "production/renders/stills/cast-bartender.png",
+      "seconds": 41,
+      "at": "2026-11-13T20:09:29.300Z"
+    },
+    "scroll-start": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "4k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "3bdf8a38-538d-477e-8490-d98ff8218816",
+      "local_path": "production/renders/stills/scroll-start.png",
+      "seconds": 49,
+      "at": "2026-11-13T20:09:36.524Z"
+    },
+    "scroll-end": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "4k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/refs/pack-ribeye.png"
+      ],
+      "job_id": "aee5eb02-43c0-4875-84ca-36d6b9d56c46",
+      "local_path": "production/renders/stills/scroll-end.png",
+      "seconds": 56,
+      "at": "2026-11-13T20:09:44.425Z"
+    },
+    "f-snap": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/cast-heroine.png"
+      ],
+      "job_id": "83c8607d-6b3d-4113-ae4d-de0fe0938731",
+      "local_path": "production/renders/stills/f-snap.png",
+      "seconds": 48,
+      "at": "2026-11-13T20:20:29.225Z"
+    },
+    "f-bartender-bite": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/cast-bartender.png"
+      ],
+      "job_id": "48d77215-4eab-4d3a-b64b-2c57f27481f3",
+      "local_path": "production/renders/stills/f-bartender-bite.png",
+      "seconds": 57,
+      "at": "2026-11-13T20:16:20.292Z"
+    },
+    "f-bartender": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/cast-bartender.png"
+      ],
+      "job_id": "90ca45fa-01f1-48fd-91d2-f203959981ad",
+      "local_path": "production/renders/stills/f-bartender.png",
+      "seconds": 60,
+      "at": "2026-11-13T20:16:23.143Z"
+    },
+    "f-second": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/cast-man.png"
+      ],
+      "job_id": "4305a48c-db63-4286-90d6-bb932268d15a",
+      "local_path": "production/renders/stills/f-second.png",
+      "seconds": 64,
+      "at": "2026-11-13T20:16:27.561Z"
+    },
+    "f-offer": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/cast-heroine.png",
+        "production/renders/stills/cast-man.png"
+      ],
+      "job_id": "c6ecc75f-291a-42b8-b395-526a5cbfaf22",
+      "local_path": "production/renders/stills/f-offer.png",
+      "seconds": 67,
+      "at": "2026-11-13T20:16:31.093Z"
+    },
+    "f-open": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/cast-heroine.png",
+        "production/renders/stills/cast-man.png",
+        "production/refs/pack-ribeye.png"
+      ],
+      "job_id": "94befc73-3018-43d9-9133-89ec7140e1c3",
+      "local_path": "production/renders/stills/f-open.png",
+      "seconds": 69,
+      "at": "2026-11-13T20:16:32.535Z"
+    },
+    "f-hush": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/cast-heroine.png",
+        "production/renders/stills/cast-man.png",
+        "production/renders/stills/cast-bartender.png",
+        "production/refs/pack-ribeye.png"
+      ],
+      "job_id": "2d8ead39-8a9e-467a-b99d-115742e8c10a",
+      "local_path": "production/renders/stills/f-hush.png",
+      "seconds": 78,
+      "at": "2026-11-13T20:16:41.589Z"
+    },
+    "f-everyone": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/f-hush.png",
+        "production/refs/pack-sheet.png"
+      ],
+      "job_id": "026aa0f2-eaed-4f2e-a388-b3bc32d80201",
+      "local_path": "production/renders/stills/f-everyone.png",
+      "seconds": 63,
+      "at": "2026-11-13T20:17:44.569Z"
+    },
+    "f-heads": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/renders/stills/f-hush.png",
+        "production/renders/stills/cast-heroine.png",
+        "production/renders/stills/cast-bartender.png"
+      ],
+      "job_id": "3543765a-ad4b-48ee-ab41-66a54d8a64c9",
+      "local_path": "production/renders/stills/f-heads.png",
+      "seconds": 67,
+      "at": "2026-11-13T20:17:49.107Z"
     }
   },
   "video": {
@@ -583,6 +808,357 @@
       "local_path": "production/renders/video/hero-loop_take.mp4",
       "credits_estimate": 96,
       "at": "2026-11-13T18:54:29.959Z"
+    },
+    "scroll-hero": {
+      "status": "done",
+      "model": "seedance_2_0",
+      "params": {
+        "resolution": "4k",
+        "duration": 10,
+        "aspect": "16:9",
+        "bitrate_mode": "high"
+      },
+      "start": "scroll-start",
+      "end": "scroll-end",
+      "prompt": "One continuous shot in extreme slow motion with a slow, steady push-in at constant speed. First the whole paper-thin beef crisp hangs in the air, turning very slightly, glowing in the warm backlight. Then a crack runs across it and it snaps cleanly in two; the two halves and a burst of small shards and salt crystals drift outward toward the edges of the frame. The camera keeps pushing forward through the gap between the halves while the focus moves to the red box behind, which becomes sharp and bright in the centre of the frame; the last shards and salt settle on the black stone at its base. The box never moves and its artwork never changes. Locked exposure, very little motion blur, every frame sharp. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "1fb76207-71b1-408a-ab2d-8e6d7c32b3b4",
+      "credits_estimate": 220,
+      "submitted_at": "2026-11-13T20:15:13.620Z",
+      "local_path": "production/renders/video/scroll-hero_take.mp4",
+      "at": "2026-11-13T20:24:55.395Z"
+    },
+    "A08": {
+      "status": "done",
+      "shot": "A08",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-second",
+      "prompt": "He bites the paper-thin crisp: it snaps cleanly with a sharp break and small shards fly; he chews, then grins widely with his mouth closed and nods. Slow push-in. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "38bc4abf-f146-4c2f-a476-b65abfaa275a",
+      "local_path": "production/renders/video/A08.mp4",
+      "credits_estimate": 80,
+      "seconds": 143,
+      "at": "2026-11-13T20:23:34.650Z"
+    },
+    "A07": {
+      "status": "done",
+      "shot": "A07",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-offer",
+      "prompt": "Sheepishly, she slides the small black dish of crisps along the counter toward the man in glasses. He looks down at it, glances at her, then picks up one crisp between two fingers. Slow dolly right. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "d925aa50-3989-4d07-b617-83c27b73c89b",
+      "local_path": "production/renders/video/A07.mp4",
+      "credits_estimate": 80,
+      "seconds": 176,
+      "at": "2026-11-13T20:24:07.729Z"
+    },
+    "A01": {
+      "status": "done",
+      "shot": "A01",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-hush",
+      "prompt": "Slow dolly forward along the counter. Everyone listens in stillness with their eyes closed; a foot taps faintly; the record spins on the turntable; behind the counter the bartender polishes a glass with slow circular motions. The red box on the counter stays still and its artwork does not change. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "2d92cd95-8f8c-4302-8ef6-04bec129d92b",
+      "local_path": "production/renders/video/A01.mp4",
+      "credits_estimate": 80,
+      "seconds": 180,
+      "at": "2026-11-13T20:24:11.398Z"
+    },
+    "A06": {
+      "status": "done",
+      "shot": "A06",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-bartender",
+      "prompt": "The bartender slowly raises his eyes from the glass and stares straight toward camera-right, deadpan, without blinking, holding the glass perfectly still. After a long beat, one eyebrow slowly rises. Nothing else moves. Locked-off camera, very slow push-in. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "3599352f-9ba4-4337-869d-8f37317ae390",
+      "local_path": "production/renders/video/A06.mp4",
+      "credits_estimate": 80,
+      "seconds": 204,
+      "at": "2026-11-13T20:24:35.200Z"
+    },
+    "A03": {
+      "status": "done",
+      "shot": "A03",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-open",
+      "prompt": "She turns the paper-thin beef crisp between her fingers under the warm lamp, admiring how the light passes through it, and smiles; then she brings it slowly toward her mouth. Slow push-in. The red box on the counter stays perfectly still and its artwork does not change. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "80f7cb6d-d795-4be3-b30e-ddb7598e0fbc",
+      "local_path": "production/renders/video/A03.mp4",
+      "credits_estimate": 80,
+      "seconds": 236,
+      "at": "2026-11-13T20:25:07.153Z"
+    },
+    "A04": {
+      "status": "done",
+      "shot": "A04",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-snap",
+      "prompt": "She bites: the paper-thin crisp snaps cleanly in two with a sharp break, and tiny shards and salt crystals fly from the break and fall in slow motion. Her eyes open wide in surprise at how loud it was, and she freezes, not chewing. Subtle handheld camera, slow push-in. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "7cec4380-003e-4ae6-9490-7b2425115400",
+      "local_path": "production/renders/video/A04.mp4",
+      "credits_estimate": 80,
+      "seconds": 266,
+      "at": "2026-11-13T20:25:37.111Z"
+    },
+    "A10": {
+      "status": "done",
+      "shot": "A10",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-everyone",
+      "prompt": "The whole bar has come alive: everyone at the counter is biting and snapping crisps and laughing, heads nodding to the music, a hand passing a box along the counter; shards and salt crystals fly in the warm light. Slow dolly back along the counter. The boxes’ artwork does not change. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "0365f57a-e5a6-4342-a818-34ff7b08365a",
+      "local_path": "production/renders/video/A10.mp4",
+      "credits_estimate": 80,
+      "seconds": 267,
+      "at": "2026-11-13T20:25:38.738Z"
+    },
+    "A05": {
+      "status": "done",
+      "shot": "A05",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-heads",
+      "prompt": "All at once, everyone at the counter finishes turning their head to look at the woman nearest the camera; behind the counter the bartender slowly lowers his glass and stares. She sits completely frozen with wide eyes and full cheeks, holding the broken half of the crisp. A long beat of total stillness. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "325387ae-18f8-4ea4-a75c-47cb54a28e6f",
+      "local_path": "production/renders/video/A05.mp4",
+      "credits_estimate": 80,
+      "seconds": 303,
+      "at": "2026-11-13T20:26:14.906Z"
+    },
+    "A12": {
+      "status": "done",
+      "shot": "A12",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-bartender-bite",
+      "prompt": "The bartender examines the crisp with suspicion, then bites it: it snaps cleanly and small shards fly. He chews sternly; then, slowly, his face breaks into a smile that he tries to hide. Locked-off camera, slow push-in. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "86c17129-a7a0-4747-b15e-94596fbdc339",
+      "local_path": "production/renders/video/A12.mp4",
+      "credits_estimate": 80,
+      "seconds": 493,
+      "at": "2026-11-13T20:29:24.811Z"
+    },
+    "A02": {
+      "status": "done",
+      "shot": "A02",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "f-bartender",
+      "prompt": "The bartender polishes the tall glass with slow circular motions of the white cloth, then glances up over it for a moment, checking the room, and looks back down at his work. Locked-off camera with a very slow push-in. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "9b0cda2c-c9da-4c94-bd29-b147081cddc4",
+      "local_path": "production/renders/video/A02.mp4",
+      "credits_estimate": 80,
+      "seconds": 788,
+      "at": "2026-11-13T20:34:18.899Z"
+    },
+    "A09_ribeye": {
+      "status": "done",
+      "shot": "A09",
+      "cut": "ribeye",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-ribeye",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "d6cd2e5d-3d75-4a89-9ce3-2b0740becbe0",
+      "reused_from": "S07_ribeye",
+      "local_path": "production/renders/video/A09_ribeye.mp4",
+      "at": "2026-11-13T18:43:20.791Z"
+    },
+    "A09_brisket": {
+      "status": "done",
+      "shot": "A09",
+      "cut": "brisket",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-brisket",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "223d1ede-2b80-4f6c-b90c-0108b8196c3a",
+      "reused_from": "S07_brisket",
+      "local_path": "production/renders/video/A09_brisket.mp4",
+      "at": "2026-11-13T18:43:05.984Z"
+    },
+    "A09_sirloin": {
+      "status": "done",
+      "shot": "A09",
+      "cut": "sirloin",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-sirloin",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "5068f470-4ea8-4ea6-a3be-7b68a83dbe1f",
+      "reused_from": "S07_sirloin",
+      "local_path": "production/renders/video/A09_sirloin.mp4",
+      "at": "2026-11-13T18:44:47.873Z"
+    },
+    "A09_shortrib": {
+      "status": "done",
+      "shot": "A09",
+      "cut": "shortrib",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-shortrib",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "eb971e9f-c1c4-4e65-8ec8-f400fae4547d",
+      "reused_from": "S07_shortrib",
+      "local_path": "production/renders/video/A09_shortrib.mp4",
+      "at": "2026-11-13T18:46:05.680Z"
+    },
+    "A11_kf-slice": {
+      "status": "done",
+      "shot": "A11",
+      "cut": "kf-slice",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "kf-slice",
+      "prompt": "The knife glides smoothly from right to left through the beef in one long stroke. The paper-thin slice peels away and lifts, glowing translucent in the warm backlight. The camera dollies slowly left with the blade. Calm and precise. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "998566a7-2c03-49b8-b2e7-cf0590916cbd",
+      "reused_from": "S02",
+      "local_path": "production/renders/video/A11_kf-slice.mp4",
+      "at": "2026-11-13T18:45:32.664Z"
+    },
+    "A11_story-dry": {
+      "status": "done",
+      "shot": "A11",
+      "cut": "story-dry",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "story-dry",
+      "prompt": "Slow, steady dolly forward down the aisle between the two rows of hanging slices. The translucent slices of beef glow amber in the backlight and sway very slightly in the warm air; a few dust motes float through the light. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "15896e76-3990-4ec2-9c4c-f791528bdaa1",
+      "reused_from": "S03",
+      "local_path": "production/renders/video/A11_story-dry.mp4",
+      "at": "2026-11-13T18:45:00.676Z"
+    },
+    "A11_kf-salt-rain": {
+      "status": "done",
+      "shot": "A11",
+      "cut": "kf-salt-rain",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "kf-salt-rain",
+      "prompt": "Extreme slow motion. The fingers rub together and release the salt blend. The grains fall in a wide sparkling curtain and scatter over the beef crisps below, some bouncing. The camera pedestals down slowly with the fall. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "87624206-eb37-4b75-8005-4adf15d1ebd9",
+      "reused_from": "S04",
+      "local_path": "production/renders/video/A11_kf-salt-rain.mp4",
+      "at": "2026-11-13T18:48:32.945Z"
+    },
+    "A13": {
+      "status": "done",
+      "shot": "A13",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "life-highball",
+      "prompt": "Slow motion. Whisky soda streams into the tall glass over the clear block ice; the liquid swirls and fine bubbles race upward; a bead of condensation runs down the glass. The camera pushes in slowly. The red box beside the glass stays perfectly still and sharp, and its artwork does not change. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "e53cd56f-85c6-495e-8bdf-5eeef4060dae",
+      "reused_from": "S05",
+      "local_path": "production/renders/video/A13.mp4",
+      "at": "2026-11-13T18:52:57.004Z"
+    },
+    "A14": {
+      "status": "done",
+      "shot": "A14",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "pack-lineup",
+      "prompt": "Slow, steady push-in toward the row of five boxes. A few beef crisps and salt flakes fall through the foreground in slow motion and scatter on the black stone. The five boxes stay perfectly still and sharp, and their artwork does not change. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting, exposure and colour of the start frame: the scene stays bright and clearly readable. No flash, no flare, nothing glows or emits light.",
+      "job_id": "a571de92-7aa0-4621-b702-bf5b21249cce",
+      "reused_from": "S08",
+      "local_path": "production/renders/video/A14.mp4",
+      "at": "2026-11-13T18:47:31.905Z"
     }
   },
   "audio": {
@@ -663,6 +1239,12 @@
       "job_id": "76bfb4bb-fa8b-4ef0-a070-f116bb12fbb8",
       "local_path": "production/renders/audio/sfx/28.4_endcard-snap.wav",
       "at": "2026-11-13T18:36:06.039Z"
+    },
+    "sfx:slide": {
+      "status": "done",
+      "job_id": "0725d532-41c4-4387-a393-b931a79e6b21",
+      "local_path": "production/renders/audio/sfx/17.6_slide.wav",
+      "at": "2026-11-13T20:20:42.825Z"
     }
   }
 }

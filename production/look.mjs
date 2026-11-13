@@ -30,6 +30,25 @@ export const PACK =
   'reproduces the flat artwork in the reference image exactly — same flat colour, the RICA wordmark top-left, one huge katakana sound word ' +
   'set vertically down the centre, the cut name bottom-left and a small row of waveform bars bottom-right. Do not redesign, restyle or add to the artwork.';
 
+/**
+ * The bar, lit to be read: the film's story scenes. Deliberately brighter than NIGHT —
+ * the first cut of the film averaged about a quarter of normal screen brightness and
+ * could not be seen on an ordinary laptop in daylight.
+ */
+export const BAR =
+  'Photoreal cinematic film still, shot on ARRI Alexa 35 with anamorphic lenses, fine 35mm film grain, shallow depth of field. ' +
+  'A small Tokyo listening bar at night, lit so that everything is clearly readable: warm tungsten pendant lamps pool light on a long light-oak counter, ' +
+  'amber-lit wooden shelves of vinyl records and a glowing tube amplifier behind the bar, one vermilion-red lamp on the far wall. ' +
+  'Faces, hands and objects are well exposed by a soft warm key light from camera-left; the shadows are deep brown and never crushed to black. ' +
+  'Palette: warm amber, oak, bone white, vermilion #E4381C accents. Natural skin, natural colour.';
+
+/** The people in the film, described the same way every time. All three are invented. */
+export const CAST = {
+  heroine: 'a Japanese woman in her late twenties with a chin-length dark bob and a black knit top',
+  man: 'a Japanese man in his early thirties with round wire glasses, short dark hair and a grey crew-neck sweater',
+  bartender: 'a Japanese bartender in his fifties with swept-back grey hair, a white shirt and a black waistcoat, deadpan and dignified',
+};
+
 export const NEG_CLEAN = 'No text, no lettering, no logos, no packaging, no watermark.';
 export const NEG_PACK = 'No extra text beyond the pack artwork, no other brands, no watermark.';
 

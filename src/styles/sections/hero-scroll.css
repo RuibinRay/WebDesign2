@@ -1,0 +1,268 @@
+/* 01 — HERO, scroll-driven. The section is tall; the picture is pinned; --p (0 → 1) is the scroll. */
+.hero--scroll {
+  display: block;
+  height: 460vh;
+  min-height: 0;
+  overflow: visible;
+  cursor: default;
+}
+.hero--scroll .hero__pin {
+  --p: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--sumi);
+}
+
+.hero__film {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.06);
+  transition:
+    opacity 1.4s ease,
+    transform 2.6s var(--ease-out);
+}
+.hero.is-ready .hero__film {
+  opacity: 1;
+  transform: none;
+}
+.hero__scrub,
+.hero__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.hero__poster {
+  transition: opacity 0.35s ease;
+}
+.hero__poster.is-hidden {
+  opacity: 0;
+}
+
+/* Phones. The film is a portrait crop, and the pack at the end is wider than a tall screen.
+   As the pack arrives the picture steps back (--end-scale, set from the screen's shape by
+   HeroScroll.jsx) so the whole pack shows above the closing line; its top and bottom edges
+   melt into the background rather than showing as a box. */
+.hero--portrait .hero__scrub,
+.hero--portrait .hero__poster {
+  --zoom: clamp(0, (var(--p) - 0.56) / 0.18, 1);
+  /* the element is the whole 900×1280 picture, wider than the screen, so stepping back reveals its sides */
+  inset: 50% auto auto 50%;
+  width: max(100%, 70.3vh);
+  width: max(100%, 70.3svh);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 900 / 1280;
+  transform-origin: 50% 15%;
+  transform: translate(-50%, -50%) scale(calc(1 - (1 - var(--end-scale, 1)) * var(--zoom)));
+  -webkit-mask-image:
+    linear-gradient(180deg, transparent 0, #000 9%, #000 90%, transparent 100%),
+    linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image:
+    linear-gradient(180deg, transparent 0, #000 9%, #000 90%, transparent 100%),
+    linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* the scrim lifts as the film takes over, and returns under the closing copy */
+.hero--scroll .hero__scrim {
+  background:
+    linear-gradient(90deg, rgba(15, 14, 13, 0.86) 0%, rgba(15, 14, 13, 0.4) 38%, rgba(15, 14, 13, 0) 62%),
+    linear-gradient(0deg, rgba(15, 14, 13, 0.88) 0%, rgba(15, 14, 13, 0) 46%),
+    linear-gradient(180deg, rgba(15, 14, 13, 0.6) 0%, rgba(15, 14, 13, 0) 20%);
+  opacity: calc(1 - clamp(0, (var(--p) - 0.03) / 0.09, 1) * 0.6 + clamp(0, (var(--p) - 0.64) / 0.12, 1) * 0.5);
+}
+
+/* ───────── beat 1: the headline ───────── */
+.hero--scroll .hero__beat--1 {
+  opacity: calc(1 - clamp(0, (var(--p) - 0.03) / 0.08, 1));
+  transform: translate3d(0, calc(clamp(0, var(--p) / 0.12, 1) * -14vh), 0);
+}
+.hero__pin:not([data-beat='1']) .hero__beat--1 {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* ───────── beat 2: the sound word, on the snap ───────── */
+.hero__snapword {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(6.5rem, 29vw, 34rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--shu);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+}
+.hero__snapword span {
+  display: inline-block;
+}
+.hero__snapword.is-hit {
+  animation: snapword 1.25s var(--ease-out) both;
+}
+.hero__snapword.is-hit span {
+  animation: snapletter 0.5s var(--ease-out) calc(var(--i) * 45ms) both;
+}
+@keyframes snapword {
+  0% { opacity: 0; transform: scale(0.72) rotate(-5deg); }
+  9% { opacity: 1; transform: scale(1.07) rotate(-3deg); }
+  20% { transform: scale(1) rotate(-3deg); }
+  62% { opacity: 1; transform: scale(1) rotate(-3deg); }
+  100% { opacity: 0; transform: scale(1.05) rotate(-3deg); }
+}
+@keyframes snapletter {
+  0% { transform: translateY(0.18em) rotate(calc((var(--i) - 1) * 7deg)); }
+  100% { transform: none; }
+}
+
+/* ───────── beat 3: the pack has arrived ───────── */
+.hero__beat--3 {
+  --in: clamp(0, (var(--p) - 0.68) / 0.1, 1);
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: clamp(5.5rem, 12vh, 8.5rem);
+  display: grid;
+  gap: clamp(1rem, 2.4vh, 1.8rem);
+  justify-items: start;
+  opacity: var(--in);
+  transform: translate3d(0, calc((1 - var(--in)) * 2.6rem), 0);
+  pointer-events: none;
+  visibility: hidden;
+}
+.hero__pin[data-beat='3'] .hero__beat--3 {
+  pointer-events: auto;
+  visibility: visible;
+}
+.hero__payoff-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.3rem;
+}
+.hero__payoff-meta span:first-child {
+  color: var(--shu);
+}
+/* The pack sits in the middle third of the picture (wider when the window is tall and the film
+   is cropped at the sides). The closing line keeps to the column on its left and never covers it. */
+.hero__payoff {
+  --pack: max(34vw, 60vh);
+  font-size: clamp(1.9rem, 3.8vw, 4.4rem);
+  max-width: calc((100vw - var(--pack)) / 2 - var(--gutter));
+}
+
+/* ───────── the rail: where you are in the shot ───────── */
+.hero__rail {
+  position: absolute;
+  z-index: 2;
+  right: calc(var(--gutter) * 0.7);
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 0.7rem;
+  color: rgba(242, 236, 225, 0.6);
+  opacity: 0;
+  transition: opacity 1s ease 1s;
+}
+.hero.is-ready .hero__rail {
+  opacity: 1;
+}
+.hero__rail .label {
+  writing-mode: vertical-rl;
+  font-size: 0.62rem;
+}
+.hero__rail-line {
+  position: relative;
+  width: 1px;
+  height: clamp(3rem, 12vh, 7rem);
+  background: rgba(242, 236, 225, 0.22);
+  overflow: hidden;
+}
+.hero__rail-line i {
+  position: absolute;
+  inset: 0;
+  background: var(--shu);
+  transform-origin: top;
+  transform: scaleY(clamp(0, var(--p) / 0.21, 1));
+}
+.hero__rail-line--2 i {
+  transform: scaleY(clamp(0, (var(--p) - 0.21) / 0.45, 1));
+}
+
+/* ───────── under the picture: hint, sound, loading ───────── */
+.hero__under {
+  position: absolute;
+  z-index: 2;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(1.2rem, 3.4vh, 2.2rem);
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  color: rgba(242, 236, 225, 0.66);
+}
+.hero--scroll .hero__hint {
+  position: static;
+  opacity: calc(1 - clamp(0, (var(--p) - 0.02) / 0.06, 1));
+  transition: none;
+}
+.hero__soundtoggle {
+  color: var(--bone);
+}
+.hero__loading {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 960px) {
+  .hero--scroll {
+    height: 400vh;
+  }
+  .hero--scroll .hero__scrim {
+    background:
+      linear-gradient(0deg, rgba(15, 14, 13, 0.94) 4%, rgba(15, 14, 13, 0.6) 40%, rgba(15, 14, 13, 0) 72%),
+      linear-gradient(180deg, rgba(15, 14, 13, 0.65) 0%, rgba(15, 14, 13, 0) 20%);
+  }
+  .hero__rail {
+    display: none;
+  }
+  .hero__payoff {
+    font-size: var(--t-h2);
+    max-width: 14ch;
+  }
+}
+@media (max-width: 720px) {
+  .hero--scroll .hero__content {
+    padding-bottom: 5.5rem;
+  }
+  .hero__beat--3 {
+    bottom: 5.5rem;
+  }
+  .hero__under {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  /* one action is enough under the pack on a phone; the story is in the menu */
+  .hero__beat--3 {
+    gap: 0.8rem;
+  }
+  .hero__beat--3 .btn--ghost {
+    display: none;
+  }
+}

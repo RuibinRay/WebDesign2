@@ -1,4 +1,5 @@
 import Media from './Media.jsx';
+import Title from './Title.jsx';
 import { world } from '../data/site.js';
 import { scrollToId, useGsap, useMediaQuery, useReveal } from '../hooks/useScroll.js';
 import '../styles/sections/world.css';
@@ -19,7 +20,7 @@ export default function World() {
       const track = el.querySelector('.world__track');
       const bar = el.querySelector('.world__progress i');
       const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
-      gsap.to(track, {
+      const travel = gsap.to(track, {
         x: () => -dist(),
         ease: 'none',
         scrollTrigger: {
@@ -34,6 +35,14 @@ export default function World() {
             bar.style.transform = `scaleX(${self.progress})`;
           },
         },
+      });
+      // inside each frame the picture drifts against the travel: depth, for free
+      el.querySelectorAll('.place__frame .media').forEach((img) => {
+        gsap.fromTo(
+          img,
+          { xPercent: -6 },
+          { xPercent: 6, ease: 'none', scrollTrigger: { trigger: img.closest('.place'), containerAnimation: travel, start: 'left right', end: 'right left', scrub: true } },
+        );
       });
     },
     [desktop],
@@ -55,13 +64,7 @@ export default function World() {
           <span className="world__no">04</span>
           {world.eyebrow}
         </p>
-        <h2 id="world-title" className="world__title quiet" data-rise>
-          {world.title.map((line, i) => (
-            <span className="rise" key={line} style={{ '--d': `${i * 0.1}s` }}>
-              <span>{line}</span>
-            </span>
-          ))}
-        </h2>
+        <Title id="world-title" className="world__title quiet" lines={world.title} />
         <p className="world__lede" data-reveal style={{ '--d': '0.2s' }}>
           {world.body}
         </p>

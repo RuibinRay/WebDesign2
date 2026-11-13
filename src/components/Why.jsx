@@ -1,4 +1,5 @@
 import Media from './Media.jsx';
+import Title from './Title.jsx';
 import Waveform from './Waveform.jsx';
 import { why } from '../data/site.js';
 import { products } from '../data/products.js';
@@ -40,13 +41,7 @@ export default function Why() {
           <span className="why__no">06</span>
           {why.eyebrow}
         </p>
-        <h2 id="why-title" className="why__title quiet" data-rise>
-          {why.title.map((line, i) => (
-            <span className="rise" key={line} style={{ '--d': `${i * 0.1}s` }}>
-              <span>{line}</span>
-            </span>
-          ))}
-        </h2>
+        <Title id="why-title" className="why__title quiet" lines={why.title} />
       </div>
 
       <div className="why__band" data-reveal>

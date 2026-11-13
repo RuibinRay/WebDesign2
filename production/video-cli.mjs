@@ -17,7 +17,7 @@ export const VIDEO_MODELS = {
     label: 'Seedance 2.5',
     defaultResolution: '1080p',
     resolutions: ['480p', '720p', '1080p', '4k'],
-    extra: (res) => ['--mode', 'omni_reference', '--resolution', res, '--generate_audio', 'false'],
+    extra: (res) => ['--mode', 'omni_reference', '--resolution', res, '--bitrate_mode', 'high', '--generate_audio', 'false'],
   },
   // 4K master. `std` is the only mode that allows 1080p / 4k.
   seedance_2_0: {
@@ -35,7 +35,8 @@ export const VIDEO_MODELS = {
   },
 };
 
-export const videoPrompt = (shot) => `${shot.video} ${VIDEO_RULES}`;
+export const videoPrompt = (shot, start) =>
+  `${shot.video && typeof shot.video === 'object' ? shot.video[start] : shot.video} ${VIDEO_RULES}`;
 
 const clamp = (model, seconds) => {
   const d = VIDEO_DURATION[model];
@@ -58,7 +59,7 @@ export function jobsForShot(shot, model = film.model) {
       cut,
       start,
       duration: clamp(model, each),
-      prompt: videoPrompt(shot),
+      prompt: videoPrompt(shot, start),
     };
   });
 }

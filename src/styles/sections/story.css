@@ -25,7 +25,7 @@
   grid-column: 1 / span 9;
   font-size: var(--t-display);
 }
-.story__title .rise:nth-child(2) {
+.story__title .title__line--2 {
   padding-left: 1.1em;
 }
 .story__lede {
@@ -138,7 +138,7 @@
   .story__lede {
     grid-column: 1 / -1;
   }
-  .story__title .rise:nth-child(2) {
+  .story__title .title__line--2 {
     padding-left: 0.5em;
   }
   .chapter,

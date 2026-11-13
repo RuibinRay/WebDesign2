@@ -525,7 +525,7 @@ node production/scripts/generate.mjs closing-gone --force   # re-roll; the curre
 
 ## Film-only start frames
 
-8 further stills exist only to start film shots. They follow the same look and are documented, with their prompts, in [02-film-storyboard.md](02-film-storyboard.md).
+22 further stills exist only to start film shots. They follow the same look and are documented, with their prompts, in [02-film-storyboard.md](02-film-storyboard.md).
 
 | Image | Film shot | Aspect | Status |
 |---|---|---|---|
@@ -537,6 +537,20 @@ node production/scripts/generate.mjs closing-gone --force   # re-roll; the curre
 | `kf-snap-brisket` | S07 | 16:9 | Generated |
 | `kf-snap-sirloin` | S07 | 16:9 | Generated |
 | `kf-snap-shortrib` | S07 | 16:9 | Generated |
+| `scroll-start` | undefined | 16:9 | Generated |
+| `scroll-end` | undefined | 16:9 | Generated |
+| `cast-heroine` | undefined | 3:4 | Generated |
+| `cast-man` | undefined | 3:4 | Generated |
+| `cast-bartender` | undefined | 3:4 | Generated |
+| `f-hush` | A01 | 16:9 | Generated |
+| `f-bartender` | A02 · A06 | 16:9 | Generated |
+| `f-open` | A03 | 16:9 | Generated |
+| `f-snap` | A04 | 16:9 | Generated |
+| `f-heads` | A05 | 16:9 | Generated |
+| `f-offer` | A07 | 16:9 | Generated |
+| `f-second` | A08 | 16:9 | Generated |
+| `f-everyone` | A10 | 16:9 | Generated |
+| `f-bartender-bite` | A12 | 16:9 | Generated |
 
 ## Generate the rest
 
@@ -550,6 +564,6 @@ npm run docs                                    # refreshes status and thumbnail
 
 To generate only the website images: `node production/scripts/generate.mjs `
 
-To re-roll one: `node production/scripts/generate.mjs <id> --force`. To raise the 15 pack shots to the top tier (105 credits): `node production/scripts/generate.mjs story-salt story-dry life-highball pack-lineup cut-ribeye cut-brisket cut-sirloin cut-shortrib cut-jerky campaign-key kf-salt-crystal kf-snap-ribeye kf-snap-brisket kf-snap-sirloin kf-snap-shortrib --force --quality xhigh --resolution 4k`. The quality and resolution flags only apply to GPT Image 2.6 jobs.
+To re-roll one: `node production/scripts/generate.mjs <id> --force`. To raise the 29 pack shots to the top tier (203 credits): `node production/scripts/generate.mjs story-salt story-dry life-highball pack-lineup cut-ribeye cut-brisket cut-sirloin cut-shortrib cut-jerky campaign-key kf-salt-crystal kf-snap-ribeye kf-snap-brisket kf-snap-sirloin kf-snap-shortrib scroll-start scroll-end cast-heroine cast-man cast-bartender f-hush f-bartender f-open f-snap f-heads f-offer f-second f-everyone f-bartender-bite --force --quality xhigh --resolution 4k`. The quality and resolution flags only apply to GPT Image 2.6 jobs.
 
 If the Higgsfield CLI is not on the PATH, set `HF_BIN` to its location first.

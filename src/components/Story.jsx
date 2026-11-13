@@ -1,5 +1,6 @@
 import Media from './Media.jsx';
 import Crack from './Crack.jsx';
+import Title from './Title.jsx';
 import { story } from '../data/site.js';
 import { useReveal, useGsap } from '../hooks/useScroll.js';
 import '../styles/sections/story.css';
@@ -16,6 +17,14 @@ export default function Story() {
         k,
         { yPercent: 18 },
         { yPercent: -18, ease: 'none', scrollTrigger: { trigger: k.closest('.chapter'), start: 'top bottom', end: 'bottom top', scrub: true } },
+      );
+    });
+    // each picture eases out of a slight zoom as it crosses the screen
+    el.querySelectorAll('.chapter .crack__piece .media').forEach((img) => {
+      gsap.fromTo(
+        img,
+        { scale: 1.16 },
+        { scale: 1, ease: 'none', scrollTrigger: { trigger: img.closest('.chapter__media'), start: 'top bottom', end: 'bottom 35%', scrub: true } },
       );
     });
     el.querySelectorAll('.chapter__media').forEach((m) => {
@@ -46,13 +55,7 @@ export default function Story() {
             <span>02</span>
             {intro.eyebrow}
           </p>
-          <h2 id="story-title" className="story__title quiet" data-rise>
-            {intro.title.map((line, i) => (
-              <span className="rise" key={line} style={{ '--d': `${i * 0.1}s` }}>
-                <span>{line}</span>
-              </span>
-            ))}
-          </h2>
+          <Title id="story-title" className="story__title quiet" lines={intro.title} />
           <p className="story__lede" data-reveal style={{ '--d': '0.25s' }}>
             {intro.body}
           </p>

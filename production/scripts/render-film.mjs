@@ -90,6 +90,10 @@ for (const shot of wanted) {
       continue;
     }
     const prev = manifest.video[job.key];
+    if (!force && !prev && fs.existsSync(path.join(OUT, `${job.key}.mp4`))) {
+      already.push(job);
+      continue;
+    }
     if (!force && prev?.status === 'done' && fs.existsSync(path.join(ROOT, prev.local_path))) {
       already.push(job);
       continue;

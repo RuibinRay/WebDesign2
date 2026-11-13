@@ -25,7 +25,7 @@ const FIX = {
 };
 
 fs.mkdirSync(OUT, { recursive: true });
-const masters = fs.existsSync(SRC) ? fs.readdirSync(SRC).filter((f) => /\.(png|jpe?g|webp)$/i.test(f) && !/_v\d+\./.test(f) && !/^kf-/.test(f)) : [];
+const masters = fs.existsSync(SRC) ? fs.readdirSync(SRC).filter((f) => /\.(png|jpe?g|webp)$/i.test(f) && !/_v\d+\./.test(f) && !/^(kf|f|cast|scroll)-/.test(f)) : [];
 
 for (const file of masters) {
   const id = file.replace(/\.[^.]+$/, '');
