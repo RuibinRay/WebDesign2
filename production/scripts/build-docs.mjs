@@ -530,6 +530,7 @@ const heroLoopCmd = shellLine('higgsfield', videoArgs({ prompt: HERO_LOOP_PROMPT
 const heroLoopDone = exists('public/videos/hero-loop.mp4');
 const filmDone = exists('public/videos/rica-oto-film.mp4');
 const musicDone = manifest.audio?.music?.status === 'done' || ['mp3', 'wav', 'm4a'].some((e) => exists(`production/renders/audio/music.${e}`));
+const sfxDone = Object.entries(manifest.audio || {}).filter(([k, v]) => k.startsWith('sfx:') && v?.status === 'done').length;
 const brandFiles = [
   ['Wordmark (the Snap)', 'src/assets/brand/rica-wordmark.svg'],
   ['Lockup', 'src/assets/brand/rica-lockup.svg'],
@@ -571,7 +572,7 @@ ${filmOnly.map(stillRow).join('\n')}
 | Film poster | Still from the film | 05 Campaign player poster | \`public/videos/rica-oto-film-poster.jpg\` | ${exists('public/videos/rica-oto-film-poster.jpg') ? 'Done' : 'Pending (written with the film)'} |
 | Teaser | Video, optional stand-in | 05 Campaign | \`public/videos/rica-oto-teaser.mp4\` | ${exists('public/videos/rica-oto-teaser.mp4') ? 'Present' : 'Not present'} |
 | Music | Audio, ${MUSIC_SECONDS} s | Film, 12.5–27.5 s | \`production/renders/audio/music.*\` | ${musicDone ? 'Done' : 'Pending'} |
-| Sound effects (${SFX.length}) | Audio | Film | \`production/renders/audio/sfx/\` | ${exists('production/renders/audio/sfx') ? 'Folder present' : 'Pending (optional: the film assembles without them)'} |
+| Sound effects (${SFX.length}) | Audio | Film | \`production/renders/audio/sfx/\` | ${sfxDone ? `Done (${sfxDone} of ${SFX.length})` : 'Pending (optional: the film assembles without them)'} |
 ${takes.map((j) => `| Film take ${j.key} | Video, ${j.duration} s | Film ${j.shot} | \`production/renders/video/${j.key}.mp4\` | ${manifest.video[j.key]?.status === 'done' ? 'Done' : done(j.start) ? 'Pending (start frame ready)' : `Pending (needs \`${j.start}\`)`} |`).join('\n')}
 ${brandFiles.map(([name, f]) => `| ${name} | Vector${f.endsWith('.png') ? ' → PNG' : ''} | Brand | \`${f}\` | ${exists(f) ? 'Done' : 'Missing — run `npm run brand`'} |`).join('\n')}
 
@@ -625,7 +626,7 @@ node production/scripts/edit-film.mjs                # trims, sound words, end c
 - What it is: ${film.music}
 - Make it (${cr(AUDIO.sonilo_music(MUSIC_SECONDS))} credits): \`node production/scripts/generate-audio.mjs music\`
 
-**Sound effects — \`production/renders/audio/sfx/\`** (${exists('production/renders/audio/sfx') ? fs.readdirSync(path.join(ROOT, 'production/renders/audio/sfx')).length : 0} files present)
+**Sound effects — \`production/renders/audio/sfx/\`** (${sfxDone} of ${SFX.length} generated)
 
 - The ${SFX.length} effects, their names and their prompts are listed in section 5 of [02-film-storyboard.md](02-film-storyboard.md). Make them with \`node production/scripts/generate-audio.mjs sfx\`.
 - They are generated, not recorded. Real recordings of the product breaking will beat them; drop a recording into the folder under the same name and it is used instead.

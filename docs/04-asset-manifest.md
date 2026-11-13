@@ -43,7 +43,7 @@ On the site, a missing image is never a broken image. The `<Media id="…">` com
 | Film poster | Still from the film | 05 Campaign player poster | `public/videos/rica-oto-film-poster.jpg` | Done |
 | Teaser | Video, optional stand-in | 05 Campaign | `public/videos/rica-oto-teaser.mp4` | Not present |
 | Music | Audio, 20 s | Film, 12.5–27.5 s | `production/renders/audio/music.*` | Done |
-| Sound effects (12) | Audio | Film | `production/renders/audio/sfx/` | Folder present |
+| Sound effects (12) | Audio | Film | `production/renders/audio/sfx/` | Done (12 of 12) |
 | Film take S01 | Video, 5 s | Film S01 | `production/renders/video/S01.mp4` | Done |
 | Film take S02 | Video, 5 s | Film S02 | `production/renders/video/S02.mp4` | Done |
 | Film take S03 | Video, 5 s | Film S03 | `production/renders/video/S03.mp4` | Done |
@@ -110,7 +110,7 @@ node production/scripts/edit-film.mjs                # trims, sound words, end c
 - What it is: Sparse late-night jazz trio heard as if from a record in a listening bar: upright bass and brushed snare, one muted trumpet phrase, 92 bpm, warm vinyl crackle, dry and close. Enters at 12.5 s on a needle drop, lifts at 19.5 s, stops dead at 27.5 s for the final snap. Instrumental, no vocals.
 - Make it (1.25 credits): `node production/scripts/generate-audio.mjs music`
 
-**Sound effects — `production/renders/audio/sfx/`** (12 files present)
+**Sound effects — `production/renders/audio/sfx/`** (12 of 12 generated)
 
 - The 12 effects, their names and their prompts are listed in section 5 of [02-film-storyboard.md](02-film-storyboard.md). Make them with `node production/scripts/generate-audio.mjs sfx`.
 - They are generated, not recorded. Real recordings of the product breaking will beat them; drop a recording into the folder under the same name and it is used instead.
