@@ -1,0 +1,40 @@
+.crack {
+  position: relative;
+}
+.crack__piece {
+  opacity: 0;
+  transition:
+    transform 1.35s var(--ease-out) var(--d, 0s),
+    opacity 0.7s ease var(--d, 0s);
+  will-change: transform;
+}
+.crack__piece--l {
+  clip-path: polygon(0 0, 58.15% 0, 52.15% 22%, 57.15% 38%, 47.15% 58%, 53.15% 74%, 44.15% 100%, 0 100%);
+  transform: translate(-4%, -3%) rotate(-2.4deg);
+}
+.crack__piece--r {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(58% 0, 100% 0, 100% 100%, 44% 100%, 53% 74%, 47% 58%, 57% 38%, 52% 22%);
+  transform: translate(4.5%, 4%) rotate(2.6deg);
+}
+.crack.is-in .crack__piece {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: hover) {
+  .crack.is-in:hover .crack__piece--r {
+    transform: translate(1.1%, 1.5%) rotate(0.9deg);
+    transition: transform 0.32s var(--ease-snap);
+  }
+  .crack.is-in:hover .crack__piece--l {
+    transform: translate(-0.3%, -0.2%);
+    transition: transform 0.32s var(--ease-snap);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crack__piece {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,17 @@
+# dependencies and build output
+node_modules/
+dist/
+.vite/
+
+# generated originals: large, not needed by the build (see README, "What is and is not in the repository")
+production/renders/
+production/final/
+production/edit/work/
+production/edit/review/
+
+# local
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db

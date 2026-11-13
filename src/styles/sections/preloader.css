@@ -1,0 +1,80 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  color: var(--bone);
+  pointer-events: none;
+}
+/* the curtain: two pieces that meet along the brand crack */
+.preloader__half {
+  position: absolute;
+  inset: 0;
+  background: var(--sumi);
+  transition: transform 1s var(--ease-snap);
+  will-change: transform;
+}
+.preloader__half--l {
+  clip-path: polygon(0 0, 58.2% 0, 52.2% 22%, 57.2% 38%, 47.2% 58%, 53.2% 74%, 44.2% 100%, 0 100%);
+}
+.preloader__half--r {
+  clip-path: polygon(58% 0, 100% 0, 100% 100%, 44% 100%, 53% 74%, 47% 58%, 57% 38%, 52% 22%);
+}
+.preloader--open .preloader__half--l {
+  transform: translate(-64%, -4%) rotate(-3deg);
+}
+.preloader--open .preloader__half--r {
+  transform: translate(64%, 5%) rotate(3deg);
+}
+
+.preloader__mark {
+  position: relative;
+  width: min(46vw, 420px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.9s var(--ease-out);
+}
+.preloader--whole .preloader__mark {
+  animation: pre-in 0.7s var(--ease-out) both;
+}
+.preloader--snapped .preloader__mark {
+  animation: pre-hit 0.4s var(--ease-out) both;
+}
+.preloader--open .preloader__mark {
+  opacity: 0;
+  transform: scale(1.12);
+}
+.preloader__kana {
+  position: absolute;
+  left: 100%;
+  bottom: 62%;
+  margin-left: 0.4rem;
+  font-family: var(--f-loud);
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  color: var(--shu);
+  white-space: nowrap;
+  opacity: 0;
+  transform: rotate(-8deg) scale(0.6);
+  transform-origin: left bottom;
+}
+.preloader--snapped .preloader__kana {
+  opacity: 1;
+  transform: rotate(-8deg) scale(1);
+  transition:
+    transform 0.3s var(--ease-out),
+    opacity 0.1s;
+}
+
+@keyframes pre-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pre-hit {
+  0% { transform: scale(1.045); }
+  100% { transform: scale(1); }
+}
+
+html.is-loading {
+  overflow: hidden;
+}

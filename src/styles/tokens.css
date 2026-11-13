@@ -1,0 +1,47 @@
+/* RICA BEEF — design tokens. The brand in variables. */
+:root {
+  /* colour */
+  --sumi: #0f0e0d;
+  --sumi-2: #171513;
+  --sumi-3: #24211e;
+  --bone: #f2ece1;
+  --bone-2: #e6dece;
+  --shu: #e4381c;
+  --shu-deep: #c92f16;
+  --karashi: #e2a31f;
+  --shio: #f7f3ea;
+  --kuro: #1c1a18;
+  --ai: #1e3559;
+  --amber: #d58a2a;
+
+  /* type families */
+  --f-loud: 'Dela Gothic One', 'Arial Black', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --f-quiet: 'Bodoni Moda', 'Didot', 'Bodoni MT', Georgia, serif;
+  --f-body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --f-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --f-ja: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+
+  /* fluid type scale */
+  --t-mega: clamp(4.4rem, 15.5vw, 17rem);
+  --t-display: clamp(3.1rem, 9.4vw, 10.5rem);
+  --t-h1: clamp(2.6rem, 6.6vw, 6.8rem);
+  --t-h2: clamp(2rem, 4.4vw, 4.4rem);
+  --t-h3: clamp(1.45rem, 2.3vw, 2.2rem);
+  --t-lead: clamp(1.1rem, 1.45vw, 1.42rem);
+  --t-body: clamp(1rem, 1.05vw, 1.1rem);
+  --t-small: 0.875rem;
+  --t-label: 0.72rem;
+
+  /* space */
+  --gutter: clamp(1.15rem, 3.6vw, 3.6rem);
+  --section: clamp(5.5rem, 13vw, 12.5rem);
+  --maxw: 1680px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.1, 1);
+  --ease-soft: cubic-bezier(0.45, 0, 0.15, 1);
+
+  --nav-h: 4.5rem;
+  --radius: 4px;
+}

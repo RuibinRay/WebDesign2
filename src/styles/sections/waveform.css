@@ -1,0 +1,22 @@
+.wave {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: var(--wave-gap, 3px);
+  height: var(--wave-h, 3rem);
+}
+.wave i {
+  display: block;
+  flex: 1 1 0;
+  min-width: 2px;
+  height: calc(var(--v) * 100%);
+  background: currentColor;
+  transform-origin: bottom;
+}
+.wave.is-hit i {
+  animation: wave-hit 0.62s var(--ease-out) calc(var(--i) * 13ms) both;
+}
+@keyframes wave-hit {
+  0% { transform: scaleY(0.02); }
+  35% { transform: scaleY(1.5); }
+  100% { transform: scaleY(1); }
+}

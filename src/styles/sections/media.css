@@ -1,0 +1,144 @@
+.media {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  background: var(--sumi-2);
+  user-select: none;
+}
+.media--fill {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+/* ───────── "Frame pending" — a proof-sheet panel, never a stock photo ───────── */
+.pending {
+  --p-bg: var(--sumi-2);
+  --p-fg: var(--bone);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  color: var(--p-fg);
+  background: var(--p-bg);
+  isolation: isolate;
+  container-type: inline-size;
+}
+.pending--fill {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.pending--night {
+  background:
+    radial-gradient(90% 70% at 12% 38%, rgba(213, 138, 42, 0.2), transparent 62%),
+    radial-gradient(40% 40% at 88% 16%, rgba(228, 56, 28, 0.2), transparent 70%),
+    var(--sumi-2);
+}
+.pending--shu {
+  --p-bg: var(--shu);
+  --p-fg: var(--sumi);
+}
+.pending--ribeye {
+  --p-bg: var(--shu-deep);
+  --p-fg: var(--bone);
+}
+.pending--brisket {
+  --p-bg: #d2931a;
+  --p-fg: var(--sumi);
+}
+.pending--sirloin {
+  --p-bg: #ede6d8;
+  --p-fg: var(--sumi);
+}
+.pending--shortrib {
+  --p-bg: #171614;
+  --p-fg: var(--bone);
+}
+.pending--jerky {
+  --p-bg: #172a47;
+  --p-fg: var(--bone);
+}
+
+.pending__mark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  opacity: 0.55;
+}
+.pending__mark::before,
+.pending__mark::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.pending__mark::before {
+  width: 100%;
+  height: 1px;
+}
+.pending__mark::after {
+  width: 1px;
+  height: 100%;
+}
+.pending__mark--tl { top: 14px; left: 14px; }
+.pending__mark--tr { top: 14px; right: 14px; }
+.pending__mark--tr::after { right: 0; }
+.pending__mark--bl { bottom: 14px; left: 14px; }
+.pending__mark--bl::before { bottom: 0; }
+.pending__mark--br { bottom: 14px; right: 14px; }
+.pending__mark--br::before { bottom: 0; }
+.pending__mark--br::after { right: 0; }
+
+.pending__glyph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--f-loud);
+  font-size: min(46cqw, 60cqh, 22rem);
+  line-height: 1;
+  opacity: 0.07;
+  z-index: -1;
+}
+.pending__head {
+  position: absolute;
+  top: 38px;
+  left: 38px;
+  right: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.4rem;
+  opacity: 0.8;
+}
+.pending__head span:first-child::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.7em;
+  border-radius: 50%;
+  background: var(--shu);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--shu) 30%, transparent);
+  vertical-align: 0.08em;
+}
+.pending--shu .pending__head span:first-child::before,
+.pending--ribeye .pending__head span:first-child::before {
+  background: currentColor;
+  box-shadow: none;
+}
+.pending__brief {
+  position: absolute;
+  left: 38px;
+  right: 38px;
+  bottom: 36px;
+  max-width: 34ch;
+  font-family: var(--f-quiet);
+  font-style: italic;
+  font-size: clamp(1rem, 5.2cqw, 1.5rem);
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  opacity: 0.88;
+}
+@container (max-width: 260px) {
+  .pending__brief { display: none; }
+  .pending__head { top: 30px; left: 30px; font-size: 0.6rem; }
+}

@@ -1,0 +1,16 @@
+{
+  "music": { "gain": -11 },
+  "tick": { "start": 0.4, "dur": 0.5, "peak": -5, "at": 2.3 },
+  "blade": { "start": 0.3, "dur": 2.6, "peak": -8, "at": 3.0 },
+  "room": { "start": 0, "dur": 3.0, "peak": -18, "at": 6.0 },
+  "salt": { "start": 0, "dur": 3.4, "peak": -8, "at": 9.0 },
+  "needle": { "start": 0, "dur": 1.5, "peak": -7, "at": 12.5 },
+  "pour": { "start": 0.2, "dur": 1.6, "peak": -10, "at": 12.7 },
+  "clink": { "file": "pour", "start": 4.6, "dur": 0.7, "peak": -7, "at": 15.2 },
+  "snap": { "start": 0.5, "dur": 0.9, "peak": -2, "at": 16.68 },
+  "pari": { "start": 0.1, "dur": 0.7, "peak": -3, "at": 19.55 },
+  "zaku": { "start": 0.0, "dur": 0.9, "peak": -3, "at": 20.55 },
+  "saku": { "start": 0.4, "dur": 0.6, "peak": -4, "at": 21.44 },
+  "kari": { "start": 0.4, "dur": 0.8, "peak": -3, "at": 22.55 },
+  "endcard-snap": { "start": 1.05, "dur": 0.9, "peak": -2, "at": 28.3 }
+}

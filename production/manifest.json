@@ -1,0 +1,668 @@
+{
+  "stills": {
+    "hero": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "e98c44bf-5568-4707-9117-4b7be026f7d7",
+      "local_path": "production/renders/stills/hero.png",
+      "seconds": 39,
+      "at": "2026-11-13T17:27:30.085Z"
+    },
+    "cut-ribeye": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "4:5",
+      "refs": [
+        "production/refs/pack-ribeye.png"
+      ],
+      "job_id": "ed8f7760-0799-4e6e-abff-0fd90bea109a",
+      "local_path": "production/renders/stills/cut-ribeye.png",
+      "seconds": 41,
+      "at": "2026-11-13T17:27:31.809Z"
+    },
+    "story-slice": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "3:4",
+      "refs": [],
+      "job_id": "b1547221-38a9-4de9-be97-6a0d3deb29a4",
+      "local_path": "production/renders/stills/story-slice.png",
+      "seconds": 24,
+      "at": "2026-11-13T17:29:34.914Z"
+    },
+    "life-bite": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "3:4",
+      "refs": [],
+      "job_id": "d307ad88-b927-4ed1-9895-9fa1909f2633",
+      "local_path": "production/renders/stills/life-bite.png",
+      "seconds": 27,
+      "at": "2026-11-13T17:29:38.274Z"
+    },
+    "life-listening-bar": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "9a8cc5ea-c79b-4604-a416-2b33383818da",
+      "local_path": "production/renders/stills/life-listening-bar.png",
+      "seconds": 32,
+      "at": "2026-11-13T17:29:43.122Z"
+    },
+    "story-salt": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "3:4",
+      "refs": [],
+      "job_id": "ce46cb61-a4db-445e-b778-eef1b7272f52",
+      "local_path": "production/renders/stills/story-salt.png",
+      "seconds": 29,
+      "at": "2026-11-13T18:38:15.320Z"
+    },
+    "hero-mobile": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "9:16",
+      "refs": [],
+      "job_id": "eb6f082c-6db1-49ac-b009-06c92ee994ae",
+      "local_path": "production/renders/stills/hero-mobile.png",
+      "seconds": 23,
+      "at": "2026-11-13T18:33:01.470Z"
+    },
+    "life-train": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "3:4",
+      "refs": [],
+      "job_id": "f8561a68-a798-4383-bc34-4a5486a83c3b",
+      "local_path": "production/renders/stills/life-train.png",
+      "seconds": 23,
+      "at": "2026-11-13T18:33:01.825Z"
+    },
+    "texture-macro": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "21:9",
+      "refs": [],
+      "job_id": "d0cdb8c5-4596-4521-84d3-8eb0108b433f",
+      "local_path": "production/renders/stills/texture-macro.png",
+      "seconds": 23,
+      "at": "2026-11-13T18:33:01.913Z"
+    },
+    "life-highball": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/refs/pack-ribeye.png"
+      ],
+      "job_id": "bba26f58-70af-43a5-b3d8-42d5f3fb0bfe",
+      "local_path": "production/renders/stills/life-highball.png",
+      "seconds": 47,
+      "at": "2026-11-13T18:33:25.808Z"
+    },
+    "cut-brisket": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "4:5",
+      "refs": [
+        "production/refs/pack-brisket.png"
+      ],
+      "job_id": "925d2311-2ac6-4ebf-9d61-5b8fe7948c97",
+      "local_path": "production/renders/stills/cut-brisket.png",
+      "seconds": 30,
+      "at": "2026-11-13T18:33:31.632Z"
+    },
+    "cut-shortrib": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "4:5",
+      "refs": [
+        "production/refs/pack-shortrib.png"
+      ],
+      "job_id": "1469f259-b2c0-46c5-8e1f-dd551f49ec58",
+      "local_path": "production/renders/stills/cut-shortrib.png",
+      "seconds": 31,
+      "at": "2026-11-13T18:33:32.907Z"
+    },
+    "story-dry": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "81e08bc2-fe2d-4f7c-a5e1-7b4c0b84c014",
+      "local_path": "production/renders/stills/story-dry.png",
+      "seconds": 43,
+      "at": "2026-11-13T18:37:19.370Z"
+    },
+    "cut-sirloin": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "4:5",
+      "refs": [
+        "production/refs/pack-sirloin.png"
+      ],
+      "job_id": "958f6dbf-7765-495a-9b0b-34ae85f0538c",
+      "local_path": "production/renders/stills/cut-sirloin.png",
+      "seconds": 38,
+      "at": "2026-11-13T18:33:39.599Z"
+    },
+    "pack-lineup": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/refs/pack-sheet.png"
+      ],
+      "job_id": "abb4ebd6-a843-4bfc-a0f3-68287b3c0237",
+      "local_path": "production/renders/stills/pack-lineup.png",
+      "seconds": 49,
+      "at": "2026-11-13T18:33:48.433Z"
+    },
+    "closing-gone": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "6257c7a5-68e7-417d-9ad7-84419af5a16f",
+      "local_path": "production/renders/stills/closing-gone.png",
+      "seconds": 22,
+      "at": "2026-11-13T18:33:55.326Z"
+    },
+    "kf-salt-crystal": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "1c27d389-2e81-4afa-a787-7152cc4a4ba0",
+      "local_path": "production/renders/stills/kf-salt-crystal.png",
+      "seconds": 33,
+      "at": "2026-11-13T18:37:09.670Z"
+    },
+    "cut-jerky": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "4:5",
+      "refs": [
+        "production/refs/pack-jerky.png"
+      ],
+      "job_id": "0a5446ed-a4d2-416e-9d10-a30f0bdce835",
+      "local_path": "production/renders/stills/cut-jerky.png",
+      "seconds": 35,
+      "at": "2026-11-13T18:34:01.215Z"
+    },
+    "kf-slice": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "19b2d897-186c-4344-abc8-d30804065fa2",
+      "local_path": "production/renders/stills/kf-slice.png",
+      "seconds": 23,
+      "at": "2026-11-13T18:34:03.057Z"
+    },
+    "kf-salt-rain": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "b95cf046-0f34-421b-82b8-4c6c7f2ad912",
+      "local_path": "production/renders/stills/kf-salt-rain.png",
+      "seconds": 16,
+      "at": "2026-11-13T18:34:04.750Z"
+    },
+    "campaign-key": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "16:9",
+      "refs": [
+        "production/refs/pack-ribeye.png"
+      ],
+      "job_id": "5be42314-78df-41cc-9a34-a439a4d3adf3",
+      "local_path": "production/renders/stills/campaign-key.png",
+      "seconds": 37,
+      "at": "2026-11-13T18:34:08.752Z"
+    },
+    "kf-bite": {
+      "status": "done",
+      "model": "soul_cinematic",
+      "params": {
+        "quality": "2k"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "612ff76d-c22b-4b53-aecf-52fa91285ffc",
+      "local_path": "production/renders/stills/kf-bite.png",
+      "seconds": 20,
+      "at": "2026-11-13T18:34:15.787Z"
+    },
+    "kf-snap-ribeye": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "466b8561-c26b-45b4-a212-53f865e5f19e",
+      "local_path": "production/renders/stills/kf-snap-ribeye.png",
+      "seconds": 35,
+      "at": "2026-11-13T18:37:11.357Z"
+    },
+    "kf-snap-brisket": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "18f7520d-1d48-4efe-8ecf-704ba6cc07d9",
+      "local_path": "production/renders/stills/kf-snap-brisket.png",
+      "seconds": 34,
+      "at": "2026-11-13T18:37:10.629Z"
+    },
+    "kf-snap-sirloin": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "c0e9333e-f59d-4284-8a0b-8b4a4f55b1d3",
+      "local_path": "production/renders/stills/kf-snap-sirloin.png",
+      "seconds": 35,
+      "at": "2026-11-13T18:37:11.310Z"
+    },
+    "kf-snap-shortrib": {
+      "status": "done",
+      "model": "gpt_image_2_6",
+      "params": {
+        "resolution": "2k",
+        "quality": "medium"
+      },
+      "aspect": "16:9",
+      "refs": [],
+      "job_id": "334ecd00-5fa9-4fbf-af64-2427f1f8508d",
+      "local_path": "production/renders/stills/kf-snap-shortrib.png",
+      "seconds": 38,
+      "at": "2026-11-13T18:37:14.713Z"
+    }
+  },
+  "video": {
+    "S07_brisket": {
+      "status": "done",
+      "shot": "S07",
+      "cut": "brisket",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-brisket",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "223d1ede-2b80-4f6c-b90c-0108b8196c3a",
+      "local_path": "production/renders/video/S07_brisket.mp4",
+      "credits_estimate": 64,
+      "seconds": 262,
+      "at": "2026-11-13T18:43:05.984Z"
+    },
+    "S07_ribeye": {
+      "status": "done",
+      "shot": "S07",
+      "cut": "ribeye",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-ribeye",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "d6cd2e5d-3d75-4a89-9ce3-2b0740becbe0",
+      "local_path": "production/renders/video/S07_ribeye.mp4",
+      "credits_estimate": 64,
+      "seconds": 277,
+      "at": "2026-11-13T18:43:20.791Z"
+    },
+    "S07_sirloin": {
+      "status": "done",
+      "shot": "S07",
+      "cut": "sirloin",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-sirloin",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "5068f470-4ea8-4ea6-a3be-7b68a83dbe1f",
+      "local_path": "production/renders/video/S07_sirloin.mp4",
+      "credits_estimate": 64,
+      "seconds": 102,
+      "at": "2026-11-13T18:44:47.873Z"
+    },
+    "S03": {
+      "status": "done",
+      "shot": "S03",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "story-dry",
+      "prompt": "Slow, steady dolly forward down the aisle between the two rows of hanging slices. The translucent slices of beef glow amber in the backlight and sway very slightly in the warm air; a few dust motes float through the light. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "15896e76-3990-4ec2-9c4c-f791528bdaa1",
+      "local_path": "production/renders/video/S03.mp4",
+      "credits_estimate": 80,
+      "seconds": 132,
+      "at": "2026-11-13T18:45:00.676Z"
+    },
+    "S01": {
+      "status": "done",
+      "shot": "S01",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "kf-salt-crystal",
+      "prompt": "Extreme slow motion. The salt flake falls straight down through the shaft of warm light, rotating slowly and sparkling. The camera tilts down gently to follow it until it lands on the glossy surface of the beef crisp below, and a few tiny crystals bounce. Dust motes drift in the light. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "6d4211e2-4f26-43c9-8b03-d51a3b833250",
+      "local_path": "production/renders/video/S01.mp4",
+      "credits_estimate": 80,
+      "seconds": 155,
+      "at": "2026-11-13T18:45:23.424Z"
+    },
+    "S02": {
+      "status": "done",
+      "shot": "S02",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "kf-slice",
+      "prompt": "The knife glides smoothly from right to left through the beef in one long stroke. The paper-thin slice peels away and lifts, glowing translucent in the warm backlight. The camera dollies slowly left with the blade. Calm and precise. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "998566a7-2c03-49b8-b2e7-cf0590916cbd",
+      "local_path": "production/renders/video/S02.mp4",
+      "credits_estimate": 80,
+      "seconds": 164,
+      "at": "2026-11-13T18:45:32.664Z"
+    },
+    "S07_shortrib": {
+      "status": "done",
+      "shot": "S07",
+      "cut": "shortrib",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 4,
+        "aspect": "16:9"
+      },
+      "start": "kf-snap-shortrib",
+      "prompt": "Extreme slow motion. The crisp snaps cleanly in half; the two halves drift apart; small shards and salt crystals burst outward from the break and hang in the air. The flat coloured background does not change. Locked-off camera. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "eb971e9f-c1c4-4e65-8ec8-f400fae4547d",
+      "local_path": "production/renders/video/S07_shortrib.mp4",
+      "credits_estimate": 64,
+      "seconds": 165,
+      "at": "2026-11-13T18:46:05.680Z"
+    },
+    "S08": {
+      "status": "done",
+      "shot": "S08",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "pack-lineup",
+      "prompt": "Slow, steady push-in toward the row of five boxes. A few beef crisps and salt flakes fall through the foreground in slow motion and scatter on the black stone. The five boxes stay perfectly still and sharp, and their artwork does not change. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "a571de92-7aa0-4621-b702-bf5b21249cce",
+      "local_path": "production/renders/video/S08.mp4",
+      "credits_estimate": 80,
+      "seconds": 164,
+      "at": "2026-11-13T18:47:31.905Z"
+    },
+    "S06": {
+      "status": "done",
+      "shot": "S06",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "kf-bite",
+      "prompt": "She bites the paper-thin beef crisp. It snaps cleanly in two with a sharp break, and tiny shards and salt crystals fly from the break and fall in slow motion. She laughs, her eyes closing; the friends beside her, out of focus, turn toward her. Subtle handheld camera, slow push-in. The light does not change: no flash, no flare, nothing glows or emits light. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "822af517-a858-4760-b84c-f234a9d18458",
+      "local_path": "production/renders/video/S06.mp4",
+      "credits_estimate": 80,
+      "seconds": 188,
+      "at": "2026-11-13T18:52:55.891Z"
+    },
+    "S04": {
+      "status": "done",
+      "shot": "S04",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "kf-salt-rain",
+      "prompt": "Extreme slow motion. The fingers rub together and release the salt blend. The grains fall in a wide sparkling curtain and scatter over the beef crisps below, some bouncing. The camera pedestals down slowly with the fall. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "87624206-eb37-4b75-8005-4adf15d1ebd9",
+      "local_path": "production/renders/video/S04.mp4",
+      "credits_estimate": 80,
+      "seconds": 212,
+      "at": "2026-11-13T18:48:32.945Z"
+    },
+    "S05": {
+      "status": "done",
+      "shot": "S05",
+      "cut": null,
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 5,
+        "aspect": "16:9"
+      },
+      "start": "life-highball",
+      "prompt": "Slow motion. Whisky soda streams into the tall glass over the clear block ice; the liquid swirls and fine bubbles race upward; a bead of condensation runs down the glass. The camera pushes in slowly. The red box beside the glass stays perfectly still and sharp, and its artwork does not change. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "e53cd56f-85c6-495e-8bdf-5eeef4060dae",
+      "local_path": "production/renders/video/S05.mp4",
+      "credits_estimate": 80,
+      "seconds": 192,
+      "at": "2026-11-13T18:52:57.004Z"
+    },
+    "hero-loop": {
+      "status": "done",
+      "model": "seedance_2_5",
+      "params": {
+        "resolution": "1080p",
+        "duration": 6,
+        "aspect": "16:9"
+      },
+      "start": "hero",
+      "prompt": "Extreme slow motion, locked-off camera. The paper-thin beef crisps hang and turn very slowly in the air; the coarse salt crystals drift downward and sparkle as they pass through the warm key light. Calm, continuous, weightless motion with no sudden events. The left third of the frame stays black and empty. Single continuous shot, no cuts. No text, no captions, no logos other than the pack artwork. Keep the lighting direction and colour of the start frame.",
+      "job_id": "def5874c-a6fb-4d64-afc3-ea2ccaed9796",
+      "local_path": "production/renders/video/hero-loop_take.mp4",
+      "credits_estimate": 96,
+      "at": "2026-11-13T18:54:29.959Z"
+    }
+  },
+  "audio": {
+    "sfx:blade": {
+      "status": "done",
+      "job_id": "0b11a395-b0e7-4fdc-a291-88452967d8c5",
+      "local_path": "production/renders/audio/sfx/3_blade.wav",
+      "at": "2026-11-13T18:34:49.852Z"
+    },
+    "sfx:room": {
+      "status": "done",
+      "job_id": "e915e21a-4ce9-4151-bb00-f1dace224d05",
+      "local_path": "production/renders/audio/sfx/6_room.wav",
+      "at": "2026-11-13T18:34:58.948Z"
+    },
+    "music": {
+      "status": "done",
+      "job_id": "1a1e99c3-84a3-4ebe-8009-94cca884e609",
+      "local_path": "production/renders/audio/music.m4a",
+      "at": "2026-11-13T18:35:01.969Z"
+    },
+    "sfx:tick": {
+      "status": "done",
+      "job_id": "0c6b63f0-d95c-4c32-b738-5535a80e1e0b",
+      "local_path": "production/renders/audio/sfx/2.8_tick.wav",
+      "at": "2026-11-13T18:35:06.842Z"
+    },
+    "sfx:salt": {
+      "status": "done",
+      "job_id": "9b757697-259d-4486-90e0-385e83195432",
+      "local_path": "production/renders/audio/sfx/9.2_salt.wav",
+      "at": "2026-11-13T18:35:18.181Z"
+    },
+    "sfx:snap": {
+      "status": "done",
+      "job_id": "f3cc06f4-6fd5-4a71-bc01-aa95751efec9",
+      "local_path": "production/renders/audio/sfx/16.6_snap.wav",
+      "at": "2026-11-13T18:35:20.360Z"
+    },
+    "sfx:needle": {
+      "status": "done",
+      "job_id": "96b1ded6-7fa6-4eca-95a4-c142741c8e39",
+      "local_path": "production/renders/audio/sfx/12.5_needle.wav",
+      "at": "2026-11-13T18:35:25.189Z"
+    },
+    "sfx:pour": {
+      "status": "done",
+      "job_id": "b9990796-81e0-4bea-8618-4f6d19dce74e",
+      "local_path": "production/renders/audio/sfx/12.8_pour.wav",
+      "at": "2026-11-13T18:35:31.123Z"
+    },
+    "sfx:pari": {
+      "status": "done",
+      "job_id": "a910326a-085e-4952-9d62-cff0d6ba39a8",
+      "local_path": "production/renders/audio/sfx/19.6_pari.wav",
+      "at": "2026-11-13T18:35:31.287Z"
+    },
+    "sfx:zaku": {
+      "status": "done",
+      "job_id": "6c8f82dc-2cfb-4576-a3e4-8d212ea96bef",
+      "local_path": "production/renders/audio/sfx/20.6_zaku.wav",
+      "at": "2026-11-13T18:35:40.306Z"
+    },
+    "sfx:saku": {
+      "status": "done",
+      "job_id": "3a581c83-af66-4467-b69f-80872133f3b4",
+      "local_path": "production/renders/audio/sfx/21.6_saku.wav",
+      "at": "2026-11-13T18:35:42.292Z"
+    },
+    "sfx:kari": {
+      "status": "done",
+      "job_id": "1fd6b58d-65d0-4d6b-baf7-38660c21bb6b",
+      "local_path": "production/renders/audio/sfx/22.6_kari.wav",
+      "at": "2026-11-13T18:35:47.670Z"
+    },
+    "sfx:endcard-snap": {
+      "status": "done",
+      "job_id": "76bfb4bb-fa8b-4ef0-a070-f116bb12fbb8",
+      "local_path": "production/renders/audio/sfx/28.4_endcard-snap.wav",
+      "at": "2026-11-13T18:36:06.039Z"
+    }
+  }
+}

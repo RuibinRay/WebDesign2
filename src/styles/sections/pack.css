@@ -1,0 +1,162 @@
+.pack-scene {
+  --pw: clamp(10.5rem, 20vw, 18.5rem);
+  --ph: calc(var(--pw) * 1.5);
+  --pd: calc(var(--pw) * 0.3);
+  position: relative;
+  width: var(--pw);
+  height: var(--ph);
+  perspective: 1500px;
+  perspective-origin: 50% 40%;
+}
+.pack-shake {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+.pack-shake.is-hit {
+  animation: pack-hit 0.5s var(--ease-out);
+}
+@keyframes pack-hit {
+  0% { transform: translate3d(0, 0, 0) rotate(0); }
+  12% { transform: translate3d(-9px, 5px, 0) rotate(-2.2deg) scale(1.03); }
+  30% { transform: translate3d(7px, -3px, 0) rotate(1.6deg); }
+  52% { transform: translate3d(-3px, 1px, 0) rotate(-0.6deg); }
+  100% { transform: none; }
+}
+
+.pack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(-7deg) rotateY(-26deg);
+  cursor: grab;
+  touch-action: pan-y;
+  will-change: transform;
+}
+.pack.is-grabbing {
+  cursor: grabbing;
+}
+.pack__face {
+  position: absolute;
+  background: var(--pk-bg);
+  color: var(--pk-ink);
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.pack__face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pack__front,
+.pack__back {
+  inset: 0;
+}
+.pack__front {
+  transform: translateZ(calc(var(--pd) / 2));
+}
+.pack__front img {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.pack__front::after {
+  background: linear-gradient(102deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 38%, rgba(0, 0, 0, 0.14) 100%);
+}
+.pack__back {
+  transform: rotateY(180deg) translateZ(calc(var(--pd) / 2));
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: calc(var(--pw) * 0.055);
+  padding: 10%;
+  text-align: center;
+}
+.pack__back::after {
+  background: linear-gradient(258deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.16) 100%);
+}
+.pack__seal {
+  width: 38%;
+}
+.pack__back-cut {
+  font-family: var(--f-loud);
+  font-size: calc(var(--pw) * 0.115);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.pack__back .wave {
+  --wave-h: calc(var(--pw) * 0.13);
+  --wave-gap: 2px;
+  width: 62%;
+}
+.pack__back .label {
+  font-size: calc(var(--pw) * 0.034);
+}
+
+.pack__side {
+  top: 0;
+  left: calc(50% - var(--pd) / 2);
+  width: var(--pd);
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+.pack__side span {
+  writing-mode: vertical-rl;
+  font-family: var(--f-mono);
+  font-size: calc(var(--pw) * 0.036);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pack__right span {
+  font-family: var(--f-loud);
+  font-size: calc(var(--pw) * 0.12);
+  text-orientation: upright;
+  letter-spacing: 0.05em;
+}
+.pack__left {
+  transform: rotateY(-90deg) translateZ(calc(var(--pw) / 2));
+}
+.pack__left::after {
+  background: rgba(0, 0, 0, 0.26);
+}
+.pack__right {
+  transform: rotateY(90deg) translateZ(calc(var(--pw) / 2));
+}
+.pack__right::after {
+  background: rgba(0, 0, 0, 0.12);
+}
+.pack__cap {
+  left: 0;
+  top: calc(50% - var(--pd) / 2);
+  width: 100%;
+  height: var(--pd);
+}
+.pack__top {
+  transform: rotateX(90deg) translateZ(calc(var(--ph) / 2));
+}
+.pack__top::after {
+  background: rgba(255, 255, 255, 0.14);
+}
+.pack__bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--ph) / 2));
+}
+.pack__bottom::after {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.pack-shadow {
+  position: absolute;
+  left: -18%;
+  right: -18%;
+  bottom: -13%;
+  height: 16%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0));
+  filter: blur(6px);
+  pointer-events: none;
+}
