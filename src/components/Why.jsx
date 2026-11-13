@@ -46,7 +46,7 @@ export default function Why() {
 
       <div className="why__band" data-reveal>
         <div className="why__band-inner">
-          <Media id="texture-macro" fill sizes="100vw" />
+          <Media id="texture-snap" fill sizes="100vw" />
         </div>
       </div>
 

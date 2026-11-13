@@ -53,6 +53,12 @@ export const catalogue = {
     alt: 'Rows of paper-thin beef slices hanging to dry, glowing amber in the backlight.',
     brief: 'Rows of paper-thin slices hanging from steel rods, backlit amber so they glow like stained glass. Wide and calm.',
   },
+  'texture-snap': {
+    ratio: 21 / 9,
+    tone: 'night',
+    alt: 'A paper-thin beef crisp splitting down the middle in warm backlight, salt crystals flying from the break.',
+    brief: 'One frame from the 4K hero shot: the crisp at the moment it cracks, marbling lit from behind, salt in the air. Made by production/renders/video/scroll-hero_take.mp4 at 3.4 s, cropped to 21:9.',
+  },
   'texture-macro': {
     ratio: 21 / 9,
     tone: 'night',
