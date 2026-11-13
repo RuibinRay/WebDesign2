@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Nav from './components/Nav.jsx';
 import Preloader from './components/Preloader.jsx';
 import Home from './pages/Home.jsx';
-import { ScrollProgress, useMagneticButtons } from './components/Motion.jsx';
+import { ScrollProgress, MotionToggle, useMagneticButtons } from './components/Motion.jsx';
 import { SoundProvider } from './hooks/useCrunch.jsx';
 import { ScrollTrigger, useSmoothScroll } from './hooks/useScroll.js';
 
@@ -29,6 +29,7 @@ export default function App() {
       <ScrollProgress />
       <div className="grain" aria-hidden="true" />
       <Nav />
+      <MotionToggle />
       <main id="main">
         <Home ready={ready} />
       </main>

@@ -32,9 +32,7 @@
     transition: transform 0.32s var(--ease-snap);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .crack__piece {
-    opacity: 1;
-    transform: none;
-  }
+:root[data-motion='reduced'] .crack__piece {
+  opacity: 1;
+  transform: none;
 }

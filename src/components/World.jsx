@@ -1,7 +1,7 @@
 import Media from './Media.jsx';
 import Title from './Title.jsx';
 import { world } from '../data/site.js';
-import { scrollToId, useGsap, useMediaQuery, useReveal } from '../hooks/useScroll.js';
+import { scrollToId, useGsap, useMediaQuery, useReveal, prefersReducedMotion } from '../hooks/useScroll.js';
 import '../styles/sections/world.css';
 
 /**
@@ -10,7 +10,7 @@ import '../styles/sections/world.css';
  * of film; on touch screens it is a native swipe gallery.
  */
 export default function World() {
-  const desktop = useMediaQuery('(min-width: 901px) and (prefers-reduced-motion: no-preference)');
+  const desktop = useMediaQuery('(min-width: 901px)') && !prefersReducedMotion();
   const reveal = useReveal();
 
   const fx = useGsap(

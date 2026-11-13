@@ -1,5 +1,30 @@
 import { useEffect, useRef } from 'react';
-import { prefersReducedMotion } from '../hooks/useScroll.js';
+import { prefersReducedMotion, MOTION_KEY } from '../hooks/useScroll.js';
+
+/**
+ * The one place a visitor can turn the motion down. Full motion is the default for everyone;
+ * this remembers the choice and reloads, because most effects decide once, when they start.
+ */
+export function MotionToggle() {
+  const reduced = prefersReducedMotion();
+  const flip = () => {
+    try {
+      if (reduced) localStorage.removeItem(MOTION_KEY);
+      else localStorage.setItem(MOTION_KEY, 'reduced');
+    } catch {
+      /* private window: the choice simply does not persist */
+    }
+    if (reduced) delete document.documentElement.dataset.motion;
+    else document.documentElement.dataset.motion = 'reduced';
+    window.scrollTo(0, 0);
+    window.location.reload();
+  };
+  return (
+    <button type="button" className="motion-toggle" aria-pressed={reduced} onClick={flip}>
+      {reduced ? 'Full motion' : 'Reduce motion'}
+    </button>
+  );
+}
 
 /** A hairline across the top of the window that fills as the page is read. */
 export function ScrollProgress() {

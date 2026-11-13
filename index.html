@@ -10,6 +10,12 @@
     />
     <meta name="theme-color" content="#0F0E0D" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <!-- the visitor's own motion choice, applied before the first paint (see MotionToggle) -->
+    <script>
+      try {
+        if (localStorage.getItem('rica-motion') === 'reduced') document.documentElement.dataset.motion = 'reduced';
+      } catch (e) {}
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Rica Beef — Every cut has a sound" />

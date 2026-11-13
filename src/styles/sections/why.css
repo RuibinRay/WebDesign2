@@ -258,8 +258,6 @@ button.check__row:focus-visible .check__sound .loud {
 .check__row.is-in .wave i {
   animation: wave-hit 0.7s var(--ease-out) calc(0.25s + var(--d, 0s) + var(--i) * 14ms) both;
 }
-@media (prefers-reduced-motion: reduce) {
-  .check__row .wave i {
-    transform: none;
-  }
+:root[data-motion='reduced'] .check__row .wave i {
+  transform: none;
 }

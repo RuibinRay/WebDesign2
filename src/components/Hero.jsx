@@ -24,7 +24,7 @@ export default function Hero({ ready }) {
   const poster = getMedia('hero');
   const portrait = getMedia('hero-mobile');
   // The moving background is for larger screens with motion allowed; phones get the portrait still.
-  const film = useMediaQuery('(min-width: 721px) and (prefers-reduced-motion: no-preference)') && videoSlots.heroLoop;
+  const film = useMediaQuery('(min-width: 721px)') && !prefersReducedMotion() && videoSlots.heroLoop;
 
   useEffect(() => {
     if (prefersReducedMotion()) return undefined;

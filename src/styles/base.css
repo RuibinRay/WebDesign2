@@ -298,22 +298,51 @@ section {
   position: relative;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-  [data-reveal],
-  .rise > span {
-    opacity: 1;
-    transform: none;
-  }
-  .grain {
-    animation: none;
+/* Motion is the visitor's choice on this site, not the operating system's: everyone gets the full
+   experience by default (Windows in particular often reports "reduce motion" for people who never
+   asked for it), and the small "Reduce motion" control at the top right turns it down. The choice
+   is remembered, and is set on <html data-motion="reduced"> before the page paints. */
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+:root[data-motion='reduced'] [data-reveal],
+:root[data-motion='reduced'] .rise > span {
+  opacity: 1;
+  transform: none;
+}
+:root[data-motion='reduced'] .grain {
+  animation: none;
+}
+
+/* the control: there for whoever looks for it, out of the way for everyone else */
+.motion-toggle {
+  position: fixed;
+  z-index: 60;
+  top: clamp(4.4rem, 9vh, 5.6rem);
+  right: var(--gutter);
+  padding: 0.5rem 0;
+  font-family: var(--f-mono, monospace);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  mix-blend-mode: difference;
+  opacity: 0.14;
+  transition: opacity 0.25s ease;
+}
+.motion-toggle:hover,
+.motion-toggle:focus-visible,
+.motion-toggle[aria-pressed='true'] {
+  opacity: 0.9;
+}
+@media (hover: none) {
+  .motion-toggle {
+    opacity: 0.28;
   }
 }
 
@@ -360,8 +389,6 @@ section {
 .btn:active {
   transform: translate(var(--mx, 0px), var(--my, 0px)) scale(0.97);
 }
-@media (prefers-reduced-motion: reduce) {
-  .rise--word > span {
-    transform: none;
-  }
+:root[data-motion='reduced'] .rise--word > span {
+  transform: none;
 }

@@ -50,10 +50,8 @@
 @keyframes marquee {
   to { transform: translateX(-33.3333%); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .marquee__track {
-    animation: none;
-  }
+:root[data-motion='reduced'] .marquee__track {
+  animation: none;
 }
 
 /* the words lean with the scroll (set from components/Marquee.jsx) */

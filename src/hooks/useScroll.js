@@ -5,8 +5,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const prefersReducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/**
+ * Reduced motion is a choice made on this site (the "Reduce motion" control, top right), not read
+ * from the operating system: every visitor starts with the full experience. index.html sets
+ * <html data-motion="reduced"> from the saved choice before anything renders.
+ */
+export const MOTION_KEY = 'rica-motion';
+export const prefersReducedMotion = () => typeof document !== 'undefined' && document.documentElement.dataset.motion === 'reduced';
 
 let lenis = null;
 export const getLenis = () => lenis;
