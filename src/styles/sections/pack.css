@@ -5,12 +5,16 @@
   position: relative;
   width: var(--pw);
   height: var(--ph);
+  /* -webkit- copies: older Safari on Mac and iPhone flattens the carton without them */
+  -webkit-perspective: 1500px;
   perspective: 1500px;
+  -webkit-perspective-origin: 50% 40%;
   perspective-origin: 50% 40%;
 }
 .pack-shake {
   width: 100%;
   height: 100%;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
 .pack-shake.is-hit {
@@ -28,6 +32,7 @@
   position: relative;
   width: 100%;
   height: 100%;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transform: rotateX(-7deg) rotateY(-26deg);
   cursor: grab;
@@ -41,6 +46,7 @@
   position: absolute;
   background: var(--pk-bg);
   color: var(--pk-ink);
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
 }
